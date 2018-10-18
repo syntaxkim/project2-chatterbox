@@ -5,9 +5,13 @@
     <title>Chatterbox</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
-    <script src="main.js"></script>
+    <script src="{{ url_for('static', filename='main.js') }}"></script>
 </head>
 <body>
     Hello
+    <form action="/">
+        <input type="text" name="name" placeholder="Pick a display name">
+        <button type="submit">Go</button>
+    </form>
 </body>
 </html>
