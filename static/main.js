@@ -26,12 +26,17 @@ document.addEventListener('DOMContentLoaded', () => {
     // When the user wants to create a new channel,
     document.querySelector('#new_channel').onsubmit = () => {
 
+        // Create a Ajax object
         const request = new XMLHttpRequest();
         const channel = document.querySelector('#channel').value;
+
+        // Check if channel name is valid
         if (!channel) {
             document.querySelector('#channel_message').innerHTML = "No channel name";
             return false;
         }
+        
+        // Connect to server
         request.open('POST', '/channel');
         
         request.onload = () => {
@@ -40,13 +45,15 @@ document.addEventListener('DOMContentLoaded', () => {
                 document.querySelector('#channel_message').innerHTML = "The same channel name already exists";
             } else {
                 location.reload();
-                alert("A new channel has been created")
+                alert("A new channel has been created");
             }
         }
 
+        // Send a new channel name to server
         const data = new FormData();
         data.append('channel', channel);
         request.send(data);
+        // Stay in the page and wait for the response
         return false;
     }
 
