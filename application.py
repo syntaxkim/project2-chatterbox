@@ -1,6 +1,6 @@
 import os
 
-from flask import Flask, render_template, request, redirect, url_for, flash
+from flask import Flask, render_template, request, flash, redirect, url_for
 from flask_socketio import SocketIO, emit
 
 app = Flask(__name__)
@@ -26,4 +26,4 @@ def channel():
     else:
         channel_list.append(channel_name)
         return redirect(url_for('index'))
-    
+        
