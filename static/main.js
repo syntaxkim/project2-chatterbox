@@ -15,10 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelector('#create').onsubmit = new_channel
 
     // When the user leaves, clear the user's name and reload the page
-    document.querySelector('#leave').onclick = () => {
-        sessionStorage.clear();
-        location.reload();
-    };
+    document.querySelector('#leave').onclick = leave
 
     // Connect to websocket
     var socket = io.connect(location.protocol + '//' + document.domain + ':' + location.port);
@@ -93,5 +90,21 @@ function new_channel() {
     data.append('channel', channel);
     request.send(data);
     // Stay in the page and wait for the response
+    return false;
+};
+
+function leave() {
+    const request = new XMLHttpRequest();
+    const name = sessionStorage.getItem('name')
+    request.open('POST', '/leave');
+
+    request.onload = () => {
+        sessionStorage.clear();
+        location.reload();
+    };
+
+    const data = new FormData();
+    data.append('name', name);
+    request.send(data);
     return false;
 };

@@ -26,7 +26,7 @@ def user():
         users.append(user)
         return 'ok'
         
-# When a user wants to create a new channel,
+# When the user wants to create a new channel,
 @app.route("/channel", methods=["POST"])
 def channel():
     channel = request.form.get('channel')
@@ -34,3 +34,13 @@ def channel():
         return 'overlap'
     else:
         channels.append(channel)
+
+# When the user leaves
+@app.route("/leave", methods=["POST"])
+def leave():
+    user = request.form.get('name')
+    if user in users:
+        users.remove(user)
+    else:
+        # Error
+        return redirect(url_for('index'))
