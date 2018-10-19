@@ -1,6 +1,14 @@
 // When the DOM is done loaded,
 document.addEventListener('DOMContentLoaded', () => {
     
+    // Connect to websocket
+    var socket = io.connect(location.protocol + '//' + document.domain + ':' + location.port);
+
+    // When connected,
+    socket.on('connect', () => {
+        socket.emit('event', {data: 'Hello'})
+    });
+
     // If a user has no display name, prompt them to make one
     if(!sessionStorage.getItem('name')) {
         document.querySelector('#main').style.display = 'none';
@@ -21,15 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // When the user leaves, clear the user's name and reload the page
     document.querySelector('#leave').onclick = leave
-
-    // Connect to websocket
-    var socket = io.connect(location.protocol + '//' + document.domain + ':' + location.port);
-
-    // When connected,
-    socket.on('connect', () => {
-        socket.emit('event', {data: 'Hello'})
-    });
-
+    
 });
 
 function join() {
