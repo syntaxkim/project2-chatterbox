@@ -18,11 +18,12 @@ def index():
 # When a user wants to create a new display name,
 @app.route("/user", methods=["POST"])
 def user():
-    user = request.form.get('user')
+    user = request.form.get('name')
     if user in users:
         return 'overlap'
     else:
-        users.append(channel)
+        users.append(user)
+        return 'ok'
         
 # When a user wants to create a new channel,
 @app.route("/channel", methods=["POST"])
