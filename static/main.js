@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', () => {
     };
     
     // When the user wants to create a new channel,
-    document.querySelector('#new_channel').onsubmit = () => {
+    document.querySelector('#create').onsubmit = () => {
 
         // Create a Ajax object
         const request = new XMLHttpRequest();

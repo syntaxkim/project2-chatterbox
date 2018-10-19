@@ -8,41 +8,45 @@
     <script src="{{ url_for('static', filename='main.js') }}"></script>
 </head>
 <body>
-    <!-- If the user has no display name, -->
-    <div id="first">
-        <h1 id="message"></h1>
-        <form id="join">
-            <input id="name" name="name" type="text" placeholder="Pick a display name" autocomplete="off" autofocus>
-            <button type="submit">Join</button>
+
+<!-- If the user has no display name, -->
+<div id="first">
+    
+    <form id="join">
+        <input id="name" type="text" autocomplete="off" autofocus placeholder="Pick a display name">
+        <button type="submit">Join</button>
+    </form>
+    <h1 id="user_message"></h1>
+
+</div>
+
+<!-- If the user has a display name, -->
+<div id="main">
+
+    <!-- Leave the chatbox -->
+    <button id="leave">Leave</button>
+
+    <!-- create a new channel -->
+    <div>
+        <form id="create">
+            <input id="channel" type="text" autocomplete="off" placeholder="Pick a channel name">
+            <button type="submit">Create a new channel</button>
         </form>
+        <div id="channel_message"></div>
     </div>
 
-    <!-- If the user has a display name, -->
-    <div id="main">
-
-        <!-- Leave the chatbox -->
-        <button id="leave">Leave</button>
-
-        <!-- create a new channel -->
-        <div>
-            <form id="new_channel">
-                <input id="channel" type="text" autocomplete="off" placeholder="Pick a channel name">
-                <button type="submit">Create a new channel</button>
-            </form>
-            <div id="channel_message"></div>
-        </div>
-
-        <!-- channel list -->
-        <div>Select channel
-            {% if channels %}
-            <select>
-                {% for channel in channels %}
-                <option>{{ channel }}</option>
-                {% endfor %}
-            </select>
-            {% endif %}
-        </div>
+    <!-- channel list -->
+    <div>Select channel
+        {% if channels %}
+        <select>
+            {% for channel in channels %}
+            <option>{{ channel }}</option>
+            {% endfor %}
+        </select>
+        {% endif %}
     </div>
+
+</div>
     
 </body>
 </html>
