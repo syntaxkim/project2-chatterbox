@@ -17,18 +17,16 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     // Join with a new display name,
-    document.querySelector('#join').onsubmit = join
+    document.querySelector('#join').onsubmit = join;
     
     // Create a new channel,
-    document.querySelector('#create').onsubmit = create
+    document.querySelector('#create').onsubmit = create;
 
     // When changing channel, (explicit function required)
-    document.querySelector('#channel-change').onchange = function() {
-        document.querySelector('#chatroom').innerHTML = this.value;
-    }
+    document.querySelector('#change').onchange = change;
 
     // When the user leaves, clear the user's name and reload the page
-    document.querySelector('#leave').onclick = leave
+    document.querySelector('#leave').onclick = leave;
     
 });
 
@@ -97,6 +95,10 @@ function create() {
     // Stay in the page and wait for the response
     return false;
 };
+
+function change() {
+    document.querySelector('#chatroom').innerHTML = this.value;
+}
 
 function leave() {
     const request = new XMLHttpRequest();
