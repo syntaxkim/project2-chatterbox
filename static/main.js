@@ -28,12 +28,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const request = new XMLHttpRequest();
         const channel = document.querySelector('#channel').value;
+        if (!channel) {
+            document.querySelector('#channel_message').innerHTML = "No channel name";
+            return false;
+        }
         request.open('POST', '/channel');
         
         request.onload = () => {
-            const data = request.responseText;
-            if (data) {
-                document.querySelector('#channel_message').innerHTML = data;
+            // Send a message if the same channel name, else, reload the page
+            if (request.responseText === "overlap") {
+                document.querySelector('#channel_message').innerHTML = "The same channel name already exists";
+            } else {
+                location.reload();
+                alert("A new channel has been created")
             }
         }
 
@@ -56,5 +63,5 @@ document.addEventListener('DOMContentLoaded', () => {
     socket.on('connect', () => {
         socket.emit('event', {data: 'Hello'})
     });
-    
+
 });

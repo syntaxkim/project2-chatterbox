@@ -14,11 +14,12 @@ channels = ['general']
 def index():
     return render_template("index.html", channels=channels)
 
+# When a user wants to create a new channel,
 @app.route("/channel", methods=["POST"])
 def channel():
     channel = request.form.get('channel')
     if channel in channels:
-        return 'The same channel name already exists.'
+        return 'overlap'
     else:
         channels.append(channel)
-        return 'ok'
+        
