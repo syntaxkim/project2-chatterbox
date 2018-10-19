@@ -8,22 +8,21 @@ app.config["SECRET_KEY"] = os.urandom(24)
 socketio = SocketIO(app)
 
 # list of all channels
-channel_list = ['general']
+channels = ['general']
 
 @app.route("/")
 def index():
-    return render_template("index.html", channels=channel_list)
+    return render_template("index.html", channels=channels)
 
 @app.route("/channel", methods=["POST"])
 def channel():
     channel_name = request.form.get('channel')
-    if channel_name in channel_list:
+    if channel_name in channels:
         flash("The same channel name already exists. Please pick another one.")
         return redirect(request.referrer)
     elif not channel_name:
         flash("Pick a channel name.")
         return redirect(request.referrer)
     else:
-        channel_list.append(channel_name)
+        channels.append(channel_name)
         return redirect(url_for('index'))
-        

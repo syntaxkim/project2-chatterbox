@@ -1,15 +1,12 @@
 // When the DOM is done loaded,
 document.addEventListener('DOMContentLoaded', () => {
     
-    // When a user has no display name,
+    // If a user has no display name, prompt them to make one
     if(!sessionStorage.getItem('name')) {
-        // prompt them to make one
-        document.querySelector('#message').innerHTML = 'Make your username'
+        document.querySelector('#second').style.display = 'none';
     } else {
-        // display greeting message.
-        name = sessionStorage.getItem('name')
-        document.querySelector('#message').innerHTML = `Hello, ${name}`;
-    }
+        document.querySelector('#first').style.display = 'none';
+    };
 
     // When the user joins with a new display name,
     document.querySelector('#join').onsubmit = () => {
