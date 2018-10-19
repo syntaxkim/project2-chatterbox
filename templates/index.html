@@ -18,28 +18,18 @@
     </div>
 
     <!-- If the user has a display name, -->
-    <div id="second">
+    <div id="main">
 
         <!-- Leave the chatbox -->
         <button id="leave">Leave</button>
 
-        <!-- create a channel -->
+        <!-- create a new channel -->
         <div>
-            <form action="{{ url_for('channel') }}" method="POST">
-                <input type="text" name="channel" placeholder="Pick a channel name">
+            <form id="new_channel">
+                <input id="channel" type="text" autocomplete="off" placeholder="Pick a channel name">
                 <button type="submit">Create a new channel</button>
-                {% with messages = get_flashed_messages() %}
-                {% if messages %}
-                    <div>
-                        <ul>
-                        {% for message in messages %}
-                            <li>{{ message }}</li>
-                        {% endfor %}
-                        </ul>
-                    </div>
-                {% endif %}
-                {% endwith %}
             </form>
+            <div id="channel_message"></div>
         </div>
 
         <!-- channel list -->

@@ -1,6 +1,6 @@
 import os
 
-from flask import Flask, render_template, request, flash, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for
 from flask_socketio import SocketIO, emit
 
 app = Flask(__name__)
@@ -16,13 +16,9 @@ def index():
 
 @app.route("/channel", methods=["POST"])
 def channel():
-    channel_name = request.form.get('channel')
-    if channel_name in channels:
-        flash("The same channel name already exists. Please pick another one.")
-        return redirect(request.referrer)
-    elif not channel_name:
-        flash("Pick a channel name.")
-        return redirect(request.referrer)
+    channel = request.form.get('channel')
+    if channel in channels:
+        return 'The same channel name already exists.'
     else:
-        channels.append(channel_name)
-        return redirect(url_for('index'))
+        channels.append(channel)
+        return 'ok'

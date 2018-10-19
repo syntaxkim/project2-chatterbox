@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // If a user has no display name, prompt them to make one
     if(!sessionStorage.getItem('name')) {
-        document.querySelector('#second').style.display = 'none';
+        document.querySelector('#main').style.display = 'none';
     } else {
         document.querySelector('#first').style.display = 'none';
     };
@@ -22,6 +22,26 @@ document.addEventListener('DOMContentLoaded', () => {
         // Save the name inside session storage
         sessionStorage.setItem('name', name);
     };
+    
+    // When the user wants to create a new channel,
+    document.querySelector('#new_channel').onsubmit = () => {
+
+        const request = new XMLHttpRequest();
+        const channel = document.querySelector('#channel').value;
+        request.open('POST', '/channel');
+        
+        request.onload = () => {
+            const data = request.responseText;
+            if (data) {
+                document.querySelector('#channel_message').innerHTML = data;
+            }
+        }
+
+        const data = new FormData();
+        data.append('channel', channel);
+        request.send(data);
+        return false;
+    }
 
     // When the user leaves, clear the user's name and reload the page
     document.querySelector('#leave').onclick = () => {
@@ -36,4 +56,5 @@ document.addEventListener('DOMContentLoaded', () => {
     socket.on('connect', () => {
         socket.emit('event', {data: 'Hello'})
     });
+    
 });
