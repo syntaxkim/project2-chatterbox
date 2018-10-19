@@ -13,7 +13,8 @@ channels = ['general']
 
 @app.route("/")
 def index():
-    return render_template("index.html", channels=channels)
+    ''' delete users in production '''
+    return render_template("index.html", channels=channels, users=users)
 
 # When a user wants to create a new display name,
 @app.route("/user", methods=["POST"])
