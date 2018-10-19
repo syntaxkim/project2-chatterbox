@@ -9,10 +9,10 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     // When the user joins with a new display name,
-    document.querySelector('#join').onsubmit = new_user
+    document.querySelector('#join').onsubmit = join
     
     // When the user wants to create a new channel,
-    document.querySelector('#create').onsubmit = new_channel
+    document.querySelector('#create').onsubmit = create
 
     // When the user leaves, clear the user's name and reload the page
     document.querySelector('#leave').onclick = leave
@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 });
 
-function new_user() {
+function join() {
 
     // Create an Ajax object
     const request = new XMLHttpRequest();
@@ -40,7 +40,7 @@ function new_user() {
     };
 
     // Connect to server
-    request.open('POST', '/user');
+    request.open('POST', '/join');
 
     request.onload = () => {
         // If the same name already exists,
@@ -60,7 +60,7 @@ function new_user() {
     return false;
 };
 
-function new_channel() {
+function create() {
 
     // Create an Ajax object
     const request = new XMLHttpRequest();
@@ -73,7 +73,7 @@ function new_channel() {
     };
     
     // Connect to server
-    request.open('POST', '/channel');
+    request.open('POST', '/create');
     
     request.onload = () => {
         // If the same name already exists,

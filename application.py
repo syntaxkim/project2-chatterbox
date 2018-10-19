@@ -17,8 +17,8 @@ def index():
     return render_template("index.html", channels=channels, users=users)
 
 # When a user wants to create a new display name,
-@app.route("/user", methods=["POST"])
-def user():
+@app.route("/join", methods=["POST"])
+def join():
     user = request.form.get('name')
     if user in users:
         return 'overlap'
@@ -27,8 +27,8 @@ def user():
         return 'ok'
         
 # When the user wants to create a new channel,
-@app.route("/channel", methods=["POST"])
-def channel():
+@app.route("/create", methods=["POST"])
+def create():
     channel = request.form.get('channel')
     if channel in channels:
         return 'overlap'
