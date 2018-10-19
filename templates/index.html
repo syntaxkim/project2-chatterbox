@@ -33,13 +33,15 @@
         </div>
 
         <!-- channel list -->
-        {% if channels %}
-        <select>
-            {% for channel in channels %}
-            <option>{{ channel }}</option>
-            {% endfor %}
-        </select>
-        {% endif %}
+        <div>Select channel
+            {% if channels %}
+            <select>
+                {% for channel in channels %}
+                <option>{{ channel }}</option>
+                {% endfor %}
+            </select>
+            {% endif %}
+        </div>
     </div>
     
 </body>

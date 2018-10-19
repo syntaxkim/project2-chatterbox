@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // When the user joins with a new display name,
     document.querySelector('#join').onsubmit = () => {
         // Check if the name is available
-        let name = document.querySelector('#name').value;
+        const name = document.querySelector('#name').value;
         if (!name) {
             alert("You need a name.");
             return false;
