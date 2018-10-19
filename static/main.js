@@ -8,11 +8,16 @@ document.addEventListener('DOMContentLoaded', () => {
         document.querySelector('#first').style.display = 'none';
     };
 
-    // When the user joins with a new display name,
+    // Join with a new display name,
     document.querySelector('#join').onsubmit = join
     
-    // When the user wants to create a new channel,
+    // Create a new channel,
     document.querySelector('#create').onsubmit = create
+
+    // When changing channel, (explicit function required)
+    document.querySelector('#channel-change').onchange = function() {
+        document.querySelector('#chatroom').innerHTML = this.value;
+    }
 
     // When the user leaves, clear the user's name and reload the page
     document.querySelector('#leave').onclick = leave
@@ -64,7 +69,7 @@ function create() {
 
     // Create an Ajax object
     const request = new XMLHttpRequest();
-    const channel = document.querySelector('#channel').value;
+    const channel = document.querySelector('#channel_name').value;
 
     // Check if channel name is valid
     if (!channel) {

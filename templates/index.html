@@ -11,13 +11,11 @@
 
 <!-- If the user has no display name, -->
 <div id="first">
-    
     <form id="join">
         <input id="name" type="text" autocomplete="off" autofocus placeholder="Pick a display name">
         <button type="submit">Join</button>
     </form>
     <h1 id="user_message"></h1>
-
 </div>
 
 <!-- If the user has a display name, -->
@@ -26,9 +24,9 @@
     <!-- channel list -->
     <div>Select channel
         {% if channels %}
-        <select>
+        <select id="channel-change">
             {% for channel in channels %}
-            <option>{{ channel }}</option>
+            <option value="{{ channel }}">{{ channel }}</option>
             {% endfor %}
         </select>
         {% endif %}
@@ -37,7 +35,7 @@
     <!-- create a new channel -->
     <div>
         <form id="create">
-            <input id="channel" type="text" autocomplete="off" placeholder="Pick a channel name">
+            <input id="channel_name" type="text" autocomplete="off" placeholder="Pick a channel name">
             <button type="submit">Create a new channel</button>
         </form>
         <div id="channel_message"></div>
@@ -61,11 +59,11 @@
 
 <!-- This section is only for development -->
 <hr>
-    <div>
-    users: {{ users }}
-    <br>
-    channels: {{ channels }}
-    </div>
+<div>
+users: {{ users }}
+<br>
+channels: {{ channels }}
+</div>
 
 </body>
 </html>
