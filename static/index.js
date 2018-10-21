@@ -45,6 +45,14 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
+    socket.on('new user', () => {
+        // update user list
+    })
+
+    socket.on('new channel', () => {
+        // update channel list
+    })
+
     // When changing channel, (explicit function required)
     /* document.querySelector('#change').onchange = () => {
         document.querySelector('#chatroom').innerHTML = this.value;
