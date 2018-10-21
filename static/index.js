@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 document.querySelector('#user_message').innerHTML = "No user name";
                 return false;
             } else {
-                // Save user name in client-side
+                // Save user name in client-side memory
                 sessionStorage.setItem('name', name);
                 socket.emit('join', {'name': name});
             };
@@ -61,7 +61,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     socket.on('change channel', data => {
-        // Save channel name in client-side
+        // Save channel name in client-side memory
         const channel = data.channel;
         sessionStorage.setItem('channel', channel);
         // Display messages
