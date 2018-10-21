@@ -16,31 +16,34 @@ def index():
     ''' delete users in production '''
     return render_template("index.html", channels=channels, users=users)
 
-# When a user wants to create a new display name,
-@app.route("/join", methods=["POST"])
-def join():
-    user = request.form.get('name')
-    if user in users:
-        return 'overlap'
+# Join in a user
+@socketio.on("join")
+def join(name):
+    name = name["name"]
+    users.append(name)
+    emit("new user", {"name": name}, broadcast=True)
+
+# Create a channel
+@socketio.on("create")
+def create(channel):
+    channel = channel["channel"]
+    if channel in channels:
+        ''' send an error '''
     else:
-        users.append(user)
-        return 'ok'
-        
-# When the user wants to create a new channel,
-@app.route("/create", methods=["POST"])
+        channels.append(channel)
+        emit("new channel", {"channel": channel}, broadcast=True)
+
+# leave the user
+@socketio.on("leave")
+def leave(name):
+    name = name["name"]
+    if name in users:
+        users.remove(name)
+
+""" @app.route("/create", methods=["POST"])
 def create():
     channel = request.form.get('channel')
     if channel in channels:
         return 'overlap'
     else:
-        channels.append(channel)
-
-# When the user leaves
-@app.route("/leave", methods=["POST"])
-def leave():
-    user = request.form.get('name')
-    if user in users:
-        users.remove(user)
-    else:
-        # Error
-        return redirect(url_for('index'))
+        channels.append(channel) """
