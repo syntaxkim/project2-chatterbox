@@ -27,6 +27,9 @@ document.addEventListener('DOMContentLoaded', () => {
             };
         };
 
+        // Disply the default channel
+        socket.emit('change', {'channel': 'general'});
+
         // Create a channel
         document.querySelector('#create').onsubmit = () => {
             const channel = document.querySelector('#channel_name').value;
