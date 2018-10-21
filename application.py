@@ -18,25 +18,25 @@ def index():
 
 # Join in a user
 @socketio.on("join")
-def join(name):
-    name = name["name"]
+def join(data):
+    name = data["name"]
     users.append(name)
     emit("new user", {"name": name}, broadcast=True)
 
 # Create a channel
 @socketio.on("create")
-def create(channel):
-    channel = channel["channel"]
+def create(data):
+    channel = data["channel"]
     if channel in channels:
-        ''' send an error '''
+        return False
     else:
         channels.append(channel)
         emit("new channel", {"channel": channel}, broadcast=True)
 
 # leave the user
 @socketio.on("leave")
-def leave(name):
-    name = name["name"]
+def leave(data):
+    name = data["name"]
     if name in users:
         users.remove(name)
 

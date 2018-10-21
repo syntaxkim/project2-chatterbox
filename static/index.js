@@ -17,8 +17,6 @@ document.addEventListener('DOMContentLoaded', () => {
         // Join in a user
         document.querySelector('#join').onsubmit = () => {
             const name = document.querySelector('#name').value;
-        
-            // Check if name is valid
             if (!name) {
                 document.querySelector('#user_message').innerHTML = "No user name";
                 return false;
@@ -48,9 +46,9 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // When changing channel, (explicit function required)
-    document.querySelector('#change').onchange = () => {
+    /* document.querySelector('#change').onchange = () => {
         document.querySelector('#chatroom').innerHTML = this.value;
-    };
+    }; */
     
 });
 
