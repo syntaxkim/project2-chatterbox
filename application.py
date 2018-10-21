@@ -11,6 +11,8 @@ socketio = SocketIO(app)
 # Server-side memory
 users = set()
 channels = {"general": deque([], maxlen=100)}
+channels["general"].append('hi')
+channels["general"].append('hello')
 
 @app.route("/")
 def index():
@@ -37,17 +39,16 @@ def create(data):
         channels[channel] = deque([], maxlen=100)
         emit("new channel", {"channel": channel}, broadcast=True)
 
+# Change the channel
+@socketio.on("change")
+def change(data):
+    if "channel" in data:
+        emit("change channel", list(channels[data["channel"]]))
+
 # leave the user
 @socketio.on("leave")
 def leave(data):
     name = data["name"]
     if name in users:
         users.remove(name)
-
-""" @app.route("/create", methods=["POST"])
-def create():
-    channel = request.form.get('channel')
-    if channel in channels:
-        return 'overlap'
-    else:
-        channels.append(channel) """
+        emit("remove name", {"name": name}, broadcast=True)

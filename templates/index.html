@@ -7,7 +7,7 @@
     {% if channels %}
     <ol id="channels">
         {% for channel in channels %}
-        <button class="channel" data-channel="{{ channel }}">{{ channel }}</button>
+        <li><a href="" class="channel" data-channel="{{ channel }}">{{ channel }}</a></li>
         {% endfor %}
     </ol>
     {% endif %}
@@ -23,8 +23,9 @@
 </div>
 
 <!-- chatroom -->
-<div id="chatroom">
-    chatroom
+<div id="chatroom">chatroom
+    <ul id="messages">
+    </ul>
 </div>
 <div>
     <form id="send">

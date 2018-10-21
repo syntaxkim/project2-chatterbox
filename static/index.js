@@ -37,28 +37,45 @@ document.addEventListener('DOMContentLoaded', () => {
             };
         };
 
+        // Change the channel
+        document.querySelectorAll('.channel').forEach(link => {
+            link.onclick = () => {
+                const channel = link.dataset.channel;
+                socket.emit('change', {'channel': channel});
+            };
+        });
+
         // Leave the user
         document.querySelector('#leave').onclick = () => {
             socket.emit('leave', {'name': name});
             sessionStorage.clear();
             location.reload();
-        }
+        };
     });
 
-    socket.on('new user', () => {
+    socket.on('new user', data => {
         // update user list
-    })
+    });
 
-    socket.on('new channel', () => {
+    socket.on('new channel', data => {
         // update channel list
-    })
+    });
 
-    // When changing channel, (explicit function required)
-    /* document.querySelector('#change').onchange = () => {
-        document.querySelector('#chatroom').innerHTML = this.value;
-    }; */
+    socket.on('change channel', data => {
+        data.forEach(message => {
+            const li = document.createElement('li');
+            li.innerHTML = message;
+            document.querySelector('#messages').append(li);
+        });
+    });
+
+    socket.on('remove name', data => {
+        // remove name from current users
+    });
     
 });
+
+
 
 
 // Ajax function
