@@ -1,0 +1,45 @@
+html, body {
+    height: 100%;
+}
+
+#navbar{
+    background-color: #303030;
+}
+
+#container{
+    min-height: 100%;
+    margin-top: 20px;
+}
+
+#footer{
+    font-size: 10px;
+    color: darkgrey;
+    bottom: 0;
+    position: relative;
+    margin-top: 40px;
+}
+
+#username{
+    color: lightskyblue;
+}
+
+@media screen and (min-width: 500px) {
+    #navbar{
+        font-size:20px;
+        font-weight: 400;
+    }
+}
+
+@media screen and (max-width: 499px) {
+    #container{
+        font-size: 12px;
+    }
+
+    #umbrella{
+        height: 160px;
+    }
+
+    #navbar{
+        font-size: 12px;
+    }
+}
