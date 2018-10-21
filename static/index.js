@@ -38,12 +38,10 @@ document.addEventListener('DOMContentLoaded', () => {
         };
 
         // Change the channel
-        document.querySelectorAll('.channel').forEach(link => {
-            link.onclick = () => {
-                const channel = link.dataset.channel;
-                socket.emit('change', {'channel': channel});
-            };
-        });
+        document.querySelector('#channels').onchange = function() {
+            const channel = this.value;
+            socket.emit('change', {'channel': channel});
+        };
 
         // Leave the user
         document.querySelector('#leave').onclick = () => {
@@ -62,6 +60,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     socket.on('change channel', data => {
+        document.querySelector('#messages').innerHTML = "";
         data.forEach(message => {
             const li = document.createElement('li');
             li.innerHTML = message;
@@ -74,8 +73,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
     
 });
-
-
 
 
 // Ajax function
