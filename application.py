@@ -43,7 +43,8 @@ def create(data):
 @socketio.on("change")
 def change(data):
     if "channel" in data:
-        emit("change channel", list(channels[data["channel"]]))
+        channel = data["channel"]
+        emit("change channel", {"channel": channel, "messages": list(channels[channel])})
 
 # leave the user
 @socketio.on("leave")

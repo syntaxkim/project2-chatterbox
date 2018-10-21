@@ -21,6 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 document.querySelector('#user_message').innerHTML = "No user name";
                 return false;
             } else {
+                // Save user name in client-side
                 sessionStorage.setItem('name', name);
                 socket.emit('join', {'name': name});
             };
@@ -60,8 +61,13 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     socket.on('change channel', data => {
+        // Save channel name in client-side
+        const channel = data.channel;
+        sessionStorage.setItem('channel', channel);
+        // Display messages
+        const messages = data.messages;
         document.querySelector('#messages').innerHTML = "";
-        data.forEach(message => {
+        messages.forEach(message => {
             const li = document.createElement('li');
             li.innerHTML = message;
             document.querySelector('#messages').append(li);
