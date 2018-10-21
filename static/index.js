@@ -11,10 +11,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // If a user has no display name, prompt them to make one
     if(!sessionStorage.getItem('name')) {
-        document.querySelector('#main').style.display = 'none';
-    } else {
-        document.querySelector('#first').style.display = 'none';
-    };
+        $('#modal').modal({ show:true, focus:true, keyboard:false, backdrop:'static' })
+    }
 
     // Join with a new display name,
     document.querySelector('#join').onsubmit = join;
@@ -31,7 +29,6 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 function join() {
-
     // Create an Ajax object
     const request = new XMLHttpRequest();
     const name = document.querySelector('#name').value;
@@ -64,7 +61,6 @@ function join() {
 };
 
 function create() {
-
     // Create an Ajax object
     const request = new XMLHttpRequest();
     const channel = document.querySelector('#channel_name').value;

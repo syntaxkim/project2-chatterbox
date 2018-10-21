@@ -2,43 +2,40 @@
 
 {% block body %}
 
-<div id="main">
 
-    <!-- channel list -->
-    <div>Select channel
-        {% if channels %}
-        <select id="change">
-            {% for channel in channels %}
-            <option value="{{ channel }}">{{ channel }}</option>
-            {% endfor %}
-        </select>
-        {% endif %}
-    </div>
-
-    <!-- create a new channel -->
-    <div>
-        <form id="create">
-            <input id="channel_name" type="text" autocomplete="off" placeholder="Pick a channel name">
-            <button type="submit">Create a new channel</button>
-        </form>
-        <div id="channel_message"></div>
-    </div>
-
-    <!-- chatroom -->
-    <div id="chatroom">
-        chatroom
-    </div>
-    <div>
-        <form id="send">
-            <input id="message" type="text" autocomplete="off" autofocus placeholder="Message">
-            <button type="submit">Send</button>
-        </form>
-    </div>
-
-    <!-- Leave the chatbox -->
-    <button id="leave">Leave</button>
-
+<!-- channel list -->
+<div>Select channel
+    {% if channels %}
+    <select id="change">
+        {% for channel in channels %}
+        <option value="{{ channel }}">{{ channel }}</option>
+        {% endfor %}
+    </select>
+    {% endif %}
 </div>
+
+<!-- create a new channel -->
+<div>
+    <form id="create">
+        <input id="channel_name" type="text" autocomplete="off" placeholder="Pick a channel name">
+        <button type="submit">Create a new channel</button>
+    </form>
+    <div id="channel_message"></div>
+</div>
+
+<!-- chatroom -->
+<div id="chatroom">
+    chatroom
+</div>
+<div>
+    <form id="send">
+        <input id="message" type="text" autocomplete="off" autofocus placeholder="Message">
+        <button type="submit">Send</button>
+    </form>
+</div>
+
+<!-- Leave the chatbox -->
+<button id="leave">Leave</button>
 
 <!-- This section is only for development -->
 <hr>
