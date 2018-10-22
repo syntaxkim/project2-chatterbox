@@ -8,11 +8,19 @@ document.addEventListener('DOMContentLoaded', () => {
         var name = sessionStorage.getItem('name')
     };
 
+    if(!sessionStorage.getItem('channel')) {
+        sessionStorage.setItem('channel', 'general');
+    } else {
+        var channel = sessionStorage.getItem('channel')
+    }
+
     // Connect to websocket
     var socket = io.connect(location.protocol + '//' + document.domain + ':' + location.port);
 
     // When connected,
     socket.on('connect', () => {
+        // Disply the default channel
+        socket.emit('change', {'channel': channel});
         
         // Join in a user
         document.querySelector('#join').onsubmit = () => {
@@ -26,9 +34,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 socket.emit('join', {'name': name});
             };
         };
-
-        // Disply the default channel
-        socket.emit('change', {'channel': 'general'});
 
         // Create a channel
         document.querySelector('#create').onsubmit = () => {
