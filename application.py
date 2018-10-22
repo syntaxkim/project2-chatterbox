@@ -14,12 +14,11 @@ users = set()
 channels = {"general": deque([], maxlen=100)}
 
 # for development
-channels["general"].append("Welcome to Chatterbox")
-channels["general"].append("This is general channel")
+channels["general"].append({"name": "general", "message": "Welcome to Chatterbox"})
 channels["channel1"] = deque([], maxlen=100)
-channels["channel1"].append("This is channel 1")
+channels["channel1"].append({"name": "channel1", "message": "This is channel 1"})
 channels["channel2"] = deque([], maxlen=100)
-channels["channel2"].append("This is channel 2")
+channels["channel2"].append({"name": "channel2", "message": "This is channel 2"})
 
 @app.route("/")
 def index():
@@ -40,9 +39,9 @@ def join(data):
 @socketio.on("send")
 def send(data):
     time = datetime.now().strftime("%I:%M %p")
-    message = f"{data['name']}: {data['message']} {time}"
+    message = {"name": data['name'], "message": data["message"], "time": time}
     channels[data["channel"]].append(message)
-    emit("new message", {"message": message}, broadcast=True)
+    emit("new message", message, broadcast=True)
 
 # Create a channel
 @socketio.on("create")

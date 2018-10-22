@@ -82,7 +82,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     socket.on('new message', data => {
         const li = document.createElement('li');
-        li.innerHTML = data.message;
+        li.innerHTML = `<strong>${data.name}</strong>: ${data.message} ${data.time}`;
         document.querySelector('#messages').append(li);
     })
 
@@ -97,9 +97,10 @@ document.addEventListener('DOMContentLoaded', () => {
         // Display messages
         const messages = data.messages;
         document.querySelector('#messages').innerHTML = "";
-        messages.forEach(message => {
+        messages.forEach(data => {
             const li = document.createElement('li');
-            li.innerHTML = message;
+            if (!data.time) data.time=""
+            li.innerHTML = `<strong>${data.name}</strong>: ${data.message} ${data.time}`;
             document.querySelector('#messages').append(li);
         });
     });
