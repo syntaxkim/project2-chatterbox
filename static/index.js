@@ -37,6 +37,18 @@ document.addEventListener('DOMContentLoaded', () => {
             };
         };
 
+        // Send a message
+        document.querySelector('#send').onsubmit = () => {
+            const message = document.querySelector('#mesage').value;
+            if (!message) {
+                return false;
+            } else {
+                socket.emit('send', {'channel': channel, 'message': message});
+                // Do not reload
+                return false;
+            };
+        };
+
         // Create a channel
         document.querySelector('#create').onsubmit = () => {
             const channel = document.querySelector('#channel_name').value;
