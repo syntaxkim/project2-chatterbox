@@ -8,6 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
         var name = sessionStorage.getItem('name')
     };
 
+    // Set channel to general if user has no session value
     if(!sessionStorage.getItem('channel')) {
         sessionStorage.setItem('channel', 'general');
     } else {
@@ -19,6 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // When connected,
     socket.on('connect', () => {
+
         // Disply the default channel
         socket.emit('change', {'channel': channel});
         
