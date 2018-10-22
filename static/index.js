@@ -6,6 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
         $('#modal').modal({ show:true, focus:true, keyboard:false, backdrop:'static' })
     } else {
         var name = sessionStorage.getItem('name')
+        document.querySelector('#username').innerHTML = name;
     };
 
     // Set channel to general if user has no session value
