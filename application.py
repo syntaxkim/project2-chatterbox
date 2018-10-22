@@ -51,6 +51,7 @@ def create(data):
         return False
     else:
         channels[channel] = deque([], maxlen=100)
+        channels[channel].append({"name": channel, "message": "New channel created"})
         emit("new channel", {"channel": channel}, broadcast=True)
 
 # Change the channel

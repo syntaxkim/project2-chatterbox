@@ -91,10 +91,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     });
 
+    // Load channel data
     socket.on('change channel', data => {
         // Save channel name in client-side memory
         sessionStorage.setItem('channel', data.channel);
-        // Display messages
         const messages = data.messages;
         document.querySelector('#messages').innerHTML = "";
         messages.forEach(data => {
