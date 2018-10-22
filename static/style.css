@@ -19,7 +19,7 @@ html, body {
     margin-top: 40px;
 }
 
-#username{
+#username, #channelname{
     color: lightskyblue;
 }
 

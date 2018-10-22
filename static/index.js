@@ -13,8 +13,8 @@ document.addEventListener('DOMContentLoaded', () => {
     if(!sessionStorage.getItem('channel')) {
         sessionStorage.setItem('channel', 'general');
     } else {
-        var channel = sessionStorage.getItem('channel')
-    }
+        var channel = sessionStorage.getItem('channel');
+    };
 
     // Connect to websocket
     var socket = io.connect(location.protocol + '//' + document.domain + ':' + location.port);
@@ -85,7 +85,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const li = document.createElement('li');
         li.innerHTML = `<strong>${data.name}</strong>: ${data.message} ${data.time}`;
         document.querySelector('#messages').append(li);
-    })
+    });
 
     // update channel list
     socket.on('new channel', data => {
@@ -96,6 +96,7 @@ document.addEventListener('DOMContentLoaded', () => {
     socket.on('change channel', data => {
         // Save channel name in client-side memory
         sessionStorage.setItem('channel', data.channel);
+        document.querySelector('#channelname').innerHTML = data.channel;
         const messages = data.messages;
         document.querySelector('#messages').innerHTML = "";
         messages.forEach(data => {
