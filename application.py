@@ -1,5 +1,6 @@
 import os
 from collections import deque
+from datetime import datetime
 
 from flask import Flask, render_template, request, redirect, url_for
 from flask_socketio import SocketIO, emit
@@ -11,8 +12,14 @@ socketio = SocketIO(app)
 # Server-side memory
 users = set()
 channels = {"general": deque([], maxlen=100)}
-channels["general"].append('hi')
-channels["general"].append('hello')
+
+# for development
+channels["general"].append("Welcome to Chatterbox")
+channels["general"].append("This is general channel")
+channels["channel1"] = deque([], maxlen=100)
+channels["channel1"].append("This is channel 1")
+channels["channel2"] = deque([], maxlen=100)
+channels["channel2"].append("This is channel 2")
 
 @app.route("/")
 def index():
@@ -35,7 +42,8 @@ def send(data):
     channel = data["channel"]
     message = data["message"]
     channels[channel].append(message)
-    emit("new message", {"message": message}, broadcast=True)
+    time = datetime.now().strftime("%I:%M%p")
+    emit("new message", {"message": message, "time": time}, broadcast=True)
 
 # Create a channel
 @socketio.on("create")
