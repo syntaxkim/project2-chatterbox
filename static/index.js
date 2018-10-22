@@ -44,6 +44,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 return false;
             } else {
                 socket.emit('send', {'channel': channel, 'message': message});
+                document.querySelector('#message').value = "";
                 // Do not reload
                 return false;
             };
