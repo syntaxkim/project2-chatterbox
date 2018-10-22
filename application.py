@@ -39,11 +39,10 @@ def join(data):
 # Send a message
 @socketio.on("send")
 def send(data):
-    channel = data["channel"]
-    message = data["message"]
-    channels[channel].append(message)
-    time = datetime.now().strftime("%I:%M%p")
-    emit("new message", {"message": message, "time": time}, broadcast=True)
+    time = datetime.now().strftime("%I:%M %p")
+    message = f"{data['name']}: {data['message']} {time}"
+    channels[data["channel"]].append(message)
+    emit("new message", {"message": message}, broadcast=True)
 
 # Create a channel
 @socketio.on("create")

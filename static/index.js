@@ -44,7 +44,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 return false;
             } else {
                 const channel = sessionStorage.getItem('channel');
-                socket.emit('send', {'channel': channel, 'message': message});
+                socket.emit('send', {'channel': channel, 'name': name, 'message': message});
                 document.querySelector('#message').value = "";
                 // Do not reload
                 return false;
@@ -82,7 +82,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     socket.on('new message', data => {
         const li = document.createElement('li');
-        li.innerHTML = `<strong>${name}</strong>: ${data.message} ${data.time}`;
+        li.innerHTML = data.message;
         document.querySelector('#messages').append(li);
     })
 
