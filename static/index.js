@@ -39,7 +39,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Send a message
         document.querySelector('#send').onsubmit = () => {
-            const message = document.querySelector('#mesage').value;
+            const message = document.querySelector('#message').value;
             if (!message) {
                 return false;
             } else {
@@ -77,6 +77,12 @@ document.addEventListener('DOMContentLoaded', () => {
     socket.on('new user', data => {
         // update user list
     });
+
+    socket.on('new message', data => {
+        const li = document.createElement('li');
+        li.innerHTML = data.message;
+        document.querySelector('#messages').append(li);
+    })
 
     socket.on('new channel', data => {
         // update channel list
