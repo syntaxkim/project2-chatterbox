@@ -29,6 +29,14 @@ def join(data):
         users.add(name)
         emit("new user", {"name": name}, broadcast=True)
 
+# Send a message
+@socketio.on("send")
+def send(data):
+    channel = data["channel"]
+    message = data["message"]
+    channels[channel].append(message)
+    emit("new message", {"message": message}, broadcast=True)
+
 # Create a channel
 @socketio.on("create")
 def create(data):
