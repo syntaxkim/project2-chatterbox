@@ -68,3 +68,6 @@ def leave(json):
     if name in users:
         users.remove(name)
         emit("remove name", {"name": name}, broadcast=True)
+
+if __name__ == "__main__":
+    socketio.run(app)
