@@ -27,8 +27,8 @@ def index():
 
 # Join in a user
 @socketio.on("join")
-def join(data):
-    name = data["name"]
+def join(json):
+    name = json["name"]
     if name in users:
         return False
     else:
@@ -37,16 +37,16 @@ def join(data):
 
 # Send a message
 @socketio.on("send")
-def send(data):
+def send(json):
     time = datetime.now().strftime("%I:%M %p")
-    message = {"name": data['name'], "message": data["message"], "time": time}
-    channels[data["channel"]].append(message)
-    emit("new message", message, broadcast=True)
+    message = {"name": json['name'], "message": json["message"], "time": time}
+    channels[json["channel"]].append(message)
+    emit("new message", (message, json["channel"]), broadcast=True)
 
 # Create a channel
 @socketio.on("create")
-def create(data):
-    channel = data["channel"]
+def create(json):
+    channel = json["channel"]
     if channel in channels:
         return False
     else:
@@ -56,15 +56,15 @@ def create(data):
 
 # Change the channel
 @socketio.on("change")
-def change(data):
-    if "channel" in data:
-        channel = data["channel"]
+def change(json):
+    if "channel" in json:
+        channel = json["channel"]
         emit("change channel", {"channel": channel, "messages": list(channels[channel])})
 
 # leave the user
 @socketio.on("leave")
-def leave(data):
-    name = data["name"]
+def leave(json):
+    name = json["name"]
     if name in users:
         users.remove(name)
         emit("remove name", {"name": name}, broadcast=True)
