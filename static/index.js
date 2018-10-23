@@ -124,37 +124,3 @@ document.addEventListener('DOMContentLoaded', () => {
     });
     
 });
-
-
-// Ajax function
-function create() {
-    // Create an Ajax object
-    const request = new XMLHttpRequest();
-    const channel = document.querySelector('#channel_name').value;
-
-    // Check if channel name is valid
-    if (!channel) {
-        document.querySelector('#channel_message').innerHTML = "No channel name";
-        return false;
-    };
-    
-    // Connect to server
-    request.open('POST', '/create');
-    
-    request.onload = () => {
-        // If the same name already exists,
-        if (request.responseText === "overlap") {
-            document.querySelector('#channel_message').innerHTML = "The same channel name already exists";
-        } else {
-            location.reload();
-            alert("A new channel has been created");
-        };
-    };
-
-    // Send a new channel name to server
-    const data = new FormData();
-    data.append('channel', channel);
-    request.send(data);
-    // Stay in the page and wait for the response
-    return false;
-};
