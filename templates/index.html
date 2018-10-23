@@ -5,12 +5,15 @@
 <!-- channel list -->
 <div>Select channel
     {% if channels %}
-    <select id="channels">
+        {% for channel in channels %}
+        <button class="channel" data-channel="{{ channel }}">{{ channel }}</button>
+        {% endfor %}
+    {% endif %}
+    <!-- <select id="channels">
         {% for channel in channels %}
         <option class="channel" value="{{ channel }}">{{ channel }}</option>
         {% endfor %}
-    </select>
-    {% endif %}
+    </select> -->
 </div>
 
 <!-- create a new channel -->

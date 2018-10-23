@@ -64,11 +64,19 @@ document.addEventListener('DOMContentLoaded', () => {
             };
         };
 
-        // Change the channel
+        // Change the channel (button-way)
+        document.querySelectorAll('.channel').forEach(button => {
+            button.onclick = () => {
+                const channel = button.dataset.channel;
+                socket.emit('change', {'channel': channel});
+            }
+        });
+        // (select-way)
+        /* })
         document.querySelector('#channels').onchange = function() {
             const channel = this.value;
             socket.emit('change', {'channel': channel});
-        };
+        }; */
 
         // Leave the user
         document.querySelector('#leave').onclick = () => {
