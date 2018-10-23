@@ -92,15 +92,10 @@ document.addEventListener('DOMContentLoaded', () => {
         // update user list
     });
 
-    socket.on('new message', (data, channel_name) => {
-        const channel = sessionStorage.getItem('channel');
-        if (channel === channel_name) {
-            const li = document.createElement('li');
-            li.innerHTML = `<strong>${data.name}</strong>: ${data.message} ${data.time}`;
-            document.querySelector('#messages').append(li);
-        } else {
-            return false;
-        }
+    socket.on('new message', (data) => {
+        const li = document.createElement('li');
+        li.innerHTML = `<strong>${data.name}</strong>: ${data.message} ${data.time}`;
+        document.querySelector('#messages').append(li);
     });
 
 

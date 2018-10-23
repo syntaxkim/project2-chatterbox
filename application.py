@@ -41,7 +41,7 @@ def send(json):
     time = datetime.now().strftime("%I:%M %p")
     message = {"name": json['name'], "message": json["message"], "time": time}
     channels[json["channel"]].append(message)
-    emit("new message", (message, json["channel"]), room=json["channel"])
+    emit("new message", message, room=json["channel"])
 
 # Create a channel
 @socketio.on("create")
