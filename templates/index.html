@@ -6,14 +6,17 @@
 <div>Select channel
     {% if channels %}
         {% for channel in channels %}
-        <button class="channel" data-channel="{{ channel }}">{{ channel }}</button>
+            <a href="#" class="channel" data-channel="{{ channel }}">{{ channel }}</a>
         {% endfor %}
-    {% endif %}
-    <!-- <select id="channels">
+        <!-- {% for channel in channels %}
+            <button class="channel" data-channel="{{ channel }}">{{ channel }}</button>
+        {% endfor %} -->
+        <!-- <select id="channels">
         {% for channel in channels %}
-        <option class="channel" value="{{ channel }}">{{ channel }}</option>
+            <option class="channel" value="{{ channel }}">{{ channel }}</option>
         {% endfor %}
-    </select> -->
+        </select> -->
+    {% endif %}
 </div>
 
 <!-- create a new channel -->

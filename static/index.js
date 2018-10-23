@@ -64,14 +64,19 @@ document.addEventListener('DOMContentLoaded', () => {
             };
         };
 
-        // Change the channel (button-way)
-        document.querySelectorAll('.channel').forEach(button => {
+        // Change the channel
+        document.querySelectorAll('.channel').forEach(link => {
+            link.onclick = () => {
+                const channel = link.dataset.channel;
+                socket.emit('change', {'channel': channel});
+            };
+        });
+        /* document.querySelectorAll('.channel').forEach(button => {
             button.onclick = () => {
                 const channel = button.dataset.channel;
                 socket.emit('change', {'channel': channel});
             }
-        });
-        // (select-way)
+        }); */
         /* })
         document.querySelector('#channels').onchange = function() {
             const channel = this.value;
