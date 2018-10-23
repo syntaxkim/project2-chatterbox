@@ -12,6 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Set channel to general if user has no session value
     if(!sessionStorage.getItem('channel')) {
         sessionStorage.setItem('channel', 'general');
+        var channel = sessionStorage.getItem('channel');
     } else {
         var channel = sessionStorage.getItem('channel');
     };
@@ -24,7 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
     socket.on('connect', () => {
 
         // Disply the default channel
-        socket.emit('change', {'channel': channel});
+        socket.emit('change', {'before': null, 'after': channel});
         
         // Join in a user
         document.querySelector('#join').onsubmit = () => {
@@ -67,8 +68,9 @@ document.addEventListener('DOMContentLoaded', () => {
         // Change the channel
         document.querySelectorAll('.channel').forEach(link => {
             link.onclick = () => {
-                const channel = link.dataset.channel;
-                socket.emit('change', {'channel': channel});
+                const before = sessionStorage.getItem('channel');
+                const after = link.dataset.channel;
+                socket.emit('change', {'before': before, 'after': after});
             };
         });
         /* document.querySelectorAll('.channel').forEach(button => {

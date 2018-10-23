@@ -3,7 +3,7 @@ from collections import deque
 from datetime import datetime
 
 from flask import Flask, render_template, request, redirect, url_for
-from flask_socketio import SocketIO, emit
+from flask_socketio import SocketIO, emit, join_room, leave_room
 
 app = Flask(__name__)
 app.config["SECRET_KEY"] = os.urandom(24)
@@ -41,7 +41,7 @@ def send(json):
     time = datetime.now().strftime("%I:%M %p")
     message = {"name": json['name'], "message": json["message"], "time": time}
     channels[json["channel"]].append(message)
-    emit("new message", (message, json["channel"]), broadcast=True)
+    emit("new message", (message, json["channel"]), room=json["channel"])
 
 # Create a channel
 @socketio.on("create")
@@ -57,9 +57,11 @@ def create(json):
 # Change the channel
 @socketio.on("change")
 def change(json):
-    if "channel" in json:
-        channel = json["channel"]
-        emit("change channel", {"channel": channel, "messages": list(channels[channel])})
+    before = json["before"]
+    leave_room(before)
+    channel = json["after"]
+    join_room(channel)
+    emit("change channel", {"channel": channel, "messages": list(channels[channel])})
 
 # leave the user
 @socketio.on("leave")
