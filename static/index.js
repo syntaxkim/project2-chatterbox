@@ -73,12 +73,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 socket.emit('change', {'before': before, 'after': after});
             };
         });
-        /* document.querySelectorAll('.channel').forEach(button => {
-            button.onclick = () => {
-                const channel = button.dataset.channel;
-                socket.emit('change', {'channel': channel});
-            }
-        }); */
 
         // Leave the user
         document.querySelector('#leave').onclick = () => {
