@@ -77,11 +77,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 socket.emit('change', {'channel': channel});
             }
         }); */
-        /* })
-        document.querySelector('#channels').onchange = function() {
-            const channel = this.value;
-            socket.emit('change', {'channel': channel});
-        }; */
 
         // Leave the user
         document.querySelector('#leave').onclick = () => {
