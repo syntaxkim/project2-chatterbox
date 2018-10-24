@@ -20,26 +20,6 @@
 </head>
 <body>
 
-<!-- modal to prompt users to type in their name-->
-<div id="modal" class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="join" aria-hidden="true">
-  <div class="modal-dialog modal-sm modal-dialog-centered">
-    <div class="modal-content">
-        <div class="modal-header">
-            <h5 class="modal-title">Choose your display name</h5>
-        </div>
-        <div class="modal-body">
-            <form id="join" action="#">
-                <input id="name" type="text" autocomplete="off" autofocus placeholder="Name">
-                <button type="submit" class="btn btn-primary">Join</button>
-            </form>
-        </div>
-        <div class="modal-footer">
-            <h6 id="user_message"></h6>
-        </div>
-    </div>
-  </div>
-</div>
-
 <!-- navbar -->
 <div id="navbar">
     <div class="container">
@@ -64,24 +44,22 @@
     </div>
 </div>
 
+<!-- modal to prompt users to type in their name-->
+{% block modal %}
+{% endblock %}
+
 <!-- container-body -->
 <div id="container" class="container">
-    {% block body %}
-    {% endblock %}
+{% block body %}
+{% endblock %}
 
 <!-- This section is only for development -->
-<hr>
-<div>
-    users: {{ users }}
-    <br>
-    channels: {{ channels }}
-</div>
-</div>
+{% block dev %}
+{% endblock %}
 
-<!-- footer -->
-<!-- <footer id="footer" class="container-fluid card-footer text-center bg-light">
+<footer id="footer" class="container-fluid card-footer text-center bg-light">
     <div id="heroku">App deployed with <a href="https://www.heroku.com" target="_blank">Heroku</a></div>
-</footer> -->
+</footer>
 
 </body>
 </html>

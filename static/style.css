@@ -11,6 +11,11 @@ html, body {
     margin-top: 20px;
 }
 
+#channel-list, #message-list {
+    height: 60vh;
+    overflow: auto;
+}
+
 #footer{
     font-size: 10px;
     color: darkgrey;

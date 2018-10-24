@@ -1,38 +1,84 @@
 {% extends "layout.html" %}
 
+{% block modal %}
+<div id="modal" class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="join" aria-hidden="true">
+  <div class="modal-dialog modal-sm modal-dialog-centered">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title">Choose your display name</h5>
+        </div>
+        <div class="modal-body">
+            <form id="join" action="#">
+                <input id="name" type="text" autocomplete="off" autofocus placeholder="Name">
+                <button type="submit" class="btn btn-primary">Join</button>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <h6 id="user_message"></h6>
+        </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
 {% block body %}
-
-<!-- channel list -->
-<div>Select channel
-    {% if channels %}
-        {% for channel in channels %}
-            <a href="#" class="channel" data-channel="{{ channel }}">{{ channel }}</a>
-        {% endfor %}
-    {% endif %}
+<div class="row justify-content-md-center">
+    <!-- channel list -->
+    <div id="channel-list" class="col-lg-3">
+        <div class="text-center">Select channel</div>
+        <ul class="list-group">
+        {% if channels %}
+            {% for channel in channels %}
+            <li class="list-group-item"><a href="#" class="channel" data-channel="{{ channel }}">{{ channel }}</a></li>
+            {% endfor %}
+        {% endif %}
+        </ul>
+    </div>
+    <!-- chatroom -->
+    <div id="message-list" class="col-lg-9">
+        <div class="text-center">Chat room</div>
+        <ul id="messages">
+        </ul>
+    </div>
 </div>
 
-<!-- create a new channel -->
-<div>
-    <form id="create" action="#">
-        <input id="channel_name" type="text" autocomplete="off" placeholder="Pick a channel name">
-        <button type="submit">Create a new channel</button>
-    </form>
-    <div id="channel_message"></div>
-</div>
-
-<!-- chatroom -->
-<div id="chatroom">chatroom
-    <ul id="messages">
-    </ul>
-</div>
-<div>
-    <form id="send">
-        <input id="message" type="text" autocomplete="off" autofocus placeholder="Message">
-        <button type="submit">Send</button>
-    </form>
+<div class="row justify-content-md-center">
+    <!-- channel input -->
+    <div class="col-lg-3">
+        <form class="form-row" id="create" action="#">
+            <div class="col-8">
+                <input id="channel_name" class="form-control" type="text" autocomplete="off" placeholder="Create a new channel">
+            </div>
+            <div class="col">
+                <button class="btn btn-primary" type="submit">Create</button>
+            </div>
+        </form>
+        <div id="channel_message"></div>
+    </div>
+    <!-- chatroom input -->
+    <div class="col-lg-9">
+        <form class="form-row" id="send">
+            <div class="col-10">
+                <input id="message" class="form-control" type="text" autocomplete="off" autofocus placeholder="Message">
+            </div>
+            <div class="col-2">
+                <button class="btn btn-primary" type="submit">Send</button>
+            </div>
+        </form>
+    </div>
+    <button class="btn btn-primary" id="leave">Leave</button>
 </div>
 
 <!-- Leave the chatbox -->
-<button id="leave">Leave</button>
 
+{% endblock %}
+
+{% block dev %}
+<hr>
+<div>
+    users: {{ users }}
+    <br>
+    channels: {{ channels }}
+</div>
+</div>
 {% endblock %}
