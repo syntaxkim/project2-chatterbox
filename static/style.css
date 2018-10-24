@@ -11,8 +11,8 @@ html, body {
     margin-top: 20px;
 }
 
-#list, #input {
-    padding-top: 20px;
+#list{
+    padding-top: 10px;
 }
 
 #channel-list, #message-list {
