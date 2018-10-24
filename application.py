@@ -30,7 +30,7 @@ def index():
 def join(json):
     name = json["name"]
     if name in users:
-        return False
+        return 1
     else:
         users.add(name)
         emit("new user", {"name": name}, broadcast=True)
@@ -48,7 +48,7 @@ def send(json):
 def create(json):
     channel = json["channel"]
     if channel in channels:
-        return False
+        return 1
     else:
         channels[channel] = deque([], maxlen=100)
         channels[channel].append({"name": channel, "message": "New channel created"})

@@ -35,8 +35,15 @@ document.addEventListener('DOMContentLoaded', () => {
                 return false;
             } else {
                 // Save user name in client-side memory
-                sessionStorage.setItem('name', name);
-                socket.emit('join', {'name': name});
+                socket.emit('join', {'name': name}, data => {
+                    if (data === 1) {
+                        document.querySelector('#user_message').innerHTML = "Username already taken.";
+                        return false;
+                    } else {
+                        sessionStorage.setItem('name', name);
+                        location.reload();
+                    };
+                });
             };
         };
 
