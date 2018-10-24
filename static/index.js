@@ -28,7 +28,7 @@ document.addEventListener('DOMContentLoaded', () => {
         socket.emit('change', {'before': null, 'after': channel});
         
         // Join in a user
-        document.querySelector('#join').onsubmit = () => {
+        document.querySelector('#join').onclick = () => {
             const name = document.querySelector('#name').value;
             if (!name) {
                 document.querySelector('#user_message').innerHTML = "No user name";

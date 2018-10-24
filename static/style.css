@@ -16,7 +16,7 @@ html, body {
 }
 
 #channel-list, #message-list {
-    height: 60vh;
+    height: 70vh;
     overflow: auto;
 }
 
