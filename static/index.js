@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const url = location.protocol + '//' + document.domain + ':' + location.port;
     var socket = io.connect(url);
 
-    // When connected,
+    // When connected, configure buttons
     socket.on('connect', () => {
 
         // Disply the default channel
