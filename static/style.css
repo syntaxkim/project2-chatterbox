@@ -11,6 +11,10 @@ html, body {
     margin-top: 20px;
 }
 
+#list, #input {
+    padding-top: 20px;
+}
+
 #channel-list, #message-list {
     height: 60vh;
     overflow: auto;

@@ -22,10 +22,10 @@
 {% endblock %}
 
 {% block body %}
-<div class="row justify-content-md-center">
-    <!-- channel list -->
+<div id="list" class="row justify-content-md-center">
+    <!-- channels -->
     <div id="channel-list" class="col-lg-3">
-        <div class="text-center">Select channel</div>
+        <h5 class="text-center">Channel list</h5>
         <ul class="list-group">
         {% if channels %}
             {% for channel in channels %}
@@ -34,22 +34,22 @@
         {% endif %}
         </ul>
     </div>
-    <!-- chatroom -->
+    <!-- messages -->
     <div id="message-list" class="col-lg-9">
-        <div class="text-center">Chat room</div>
+        <h5 class="text-center">Chat room</h5>
         <ul id="messages">
         </ul>
     </div>
 </div>
 
-<div class="row justify-content-md-center">
+<div id="input" class="row justify-content-md-center">
     <!-- channel input -->
     <div class="col-lg-3">
         <form class="form-row" id="create" action="#">
             <div class="col-8">
-                <input id="channel_name" class="form-control" type="text" autocomplete="off" placeholder="Create a new channel">
+                <input id="channel_name" class="form-control" type="text" autocomplete="off" placeholder="New channel">
             </div>
-            <div class="col">
+            <div class="col-1">
                 <button class="btn btn-primary" type="submit">Create</button>
             </div>
         </form>
@@ -61,12 +61,14 @@
             <div class="col-10">
                 <input id="message" class="form-control" type="text" autocomplete="off" autofocus placeholder="Message">
             </div>
-            <div class="col-2">
+            <div class="col-1">
                 <button class="btn btn-primary" type="submit">Send</button>
+            </div>
+            <div class="col-1">
+                <button class="btn btn-secondary" id="leave">Leave</button>
             </div>
         </form>
     </div>
-    <button class="btn btn-primary" id="leave">Leave</button>
 </div>
 
 <!-- Leave the chatbox -->
