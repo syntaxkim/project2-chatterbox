@@ -62,7 +62,7 @@ document.addEventListener('DOMContentLoaded', () => {
         };
 
         // Create a channel
-        document.querySelector('#create').onsubmit = () => {
+        document.querySelector('#create').onclick = () => {
             const channel = document.querySelector('#channel_name').value;
             if (!channel) {
                 document.querySelector('#channel_message').innerHTML = "No channel name";

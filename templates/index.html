@@ -9,7 +9,7 @@
         </div>
         <div class="modal-body">
             <input id="name" type="text" autocomplete="off" autofocus placeholder="Name">
-            <button id="join" type="submit" class="btn btn-primary">Join</button>
+            <button id="join" class="btn btn-primary">Join</button>
         </div>
         <div class="modal-footer">
             <h6 id="user_message"></h6>
@@ -33,15 +33,13 @@
             {% endif %}
             </div>
         </div>
-        <div>
-            <form class="form-row" id="create" action="#">
-                <div class="col-8">
-                    <input id="channel_name" class="form-control" type="text" autocomplete="off" placeholder="New channel">
-                </div>
-                <div class="col-1">
-                    <button class="btn btn-primary" type="submit">Create</button>
-                </div>
-            </form>
+        <div class="form-row">
+            <div class="col-8">
+                <input id="channel_name" class="form-control" type="text" autocomplete="off" placeholder="New channel">
+            </div>
+            <div class="col-1">
+                <button id="create" class="btn btn-primary">Create</button>
+            </div>
             <div id="channel_message"></div>
         </div>
     </div>
