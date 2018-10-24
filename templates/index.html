@@ -26,13 +26,13 @@
     <!-- channels -->
     <div id="channel-list" class="col-lg-3">
         <h5 class="text-center">Channel list</h5>
-        <ul class="list-group">
+        <div class="list-group" id="list-tab" role="tablist">
         {% if channels %}
             {% for channel in channels %}
-            <li class="list-group-item"><a href="#" class="channel" data-channel="{{ channel }}">{{ channel }}</a></li>
+            <a href="#" class="channel list-group-item list-group-item-action" id="list-home-list" data-toggle="list" role="tab" data-channel="{{ channel }}">{{ channel }}</a>
             {% endfor %}
         {% endif %}
-        </ul>
+        </div>
     </div>
     <!-- messages -->
     <div id="message-list" class="col-lg-9">
