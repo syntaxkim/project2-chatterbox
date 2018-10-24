@@ -68,7 +68,15 @@ document.addEventListener('DOMContentLoaded', () => {
                 document.querySelector('#channel_message').innerHTML = "No channel name";
                 return false;
             } else {
-                socket.emit('create', {'channel': channel});
+                socket.emit('create', {'channel': channel}, data => {
+                    if (data === 1) {
+                        document.querySelector('#channel_message').innerHTML = "The same channel name already exists.";
+                        return false;
+                    } else {
+                        location.reload();
+                        alert(`New channel: '${channel}' created.`);
+                    };
+                });
             };
         };
 
