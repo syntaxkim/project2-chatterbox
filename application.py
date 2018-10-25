@@ -22,7 +22,6 @@ channels["channel 2"].append({"name": "channel 2", "message": "This is channel 2
 
 @app.route("/")
 def index():
-    ''' delete users in production '''
     return render_template("index.html", channels=list(channels), users=list(users))
 
 # Join in a user
@@ -58,7 +57,7 @@ def create(json):
 
 # Load messages
 @socketio.on("get messages")
-def change(json):
+def get_messages(json):
     before = json["before"]
     leave_room(before)
     channel = json["after"]
