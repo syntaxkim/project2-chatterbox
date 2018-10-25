@@ -41,6 +41,10 @@ html, body {
     width: 100%
 }
 
+#messages {
+    list-style-type: none;
+}
+
 .form-row {
     margin-bottom: 14px;
 }

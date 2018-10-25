@@ -1,7 +1,7 @@
 // When the DOM is done loaded,
 document.addEventListener('DOMContentLoaded', () => {
     
-    // If a user has no display name, prompt them to make one
+    // Get user name
     if(!sessionStorage.getItem('name')) {
         $('#modal').modal({ show:true, focus:true, keyboard:false, backdrop:'static' })
     } else {
@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
         document.querySelector('#username').innerHTML = name;
     };
 
-    // Set channel to general if user has no session value
+    // Get channel name
     if(!sessionStorage.getItem('channel')) {
         sessionStorage.setItem('channel', 'general');
         var channel = sessionStorage.getItem('channel');
@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
     socket.on('connect', () => {
 
         // Disply the default channel
-        socket.emit('change', {'before': null, 'after': channel});
+        socket.emit('load channel', {'before': null, 'after': channel});
         
         // Join in a user
         document.querySelector('#join').onclick = () => {
@@ -80,12 +80,12 @@ document.addEventListener('DOMContentLoaded', () => {
             };
         };
 
-        // Change the channel
+        // Load the channel
         document.querySelectorAll('.channel').forEach(link => {
             link.onclick = () => {
                 const before = sessionStorage.getItem('channel');
                 const after = link.dataset.channel;
-                socket.emit('change', {'before': before, 'after': after});
+                socket.emit('load channel', {'before': before, 'after': after});
             };
         });
 
@@ -97,47 +97,38 @@ document.addEventListener('DOMContentLoaded', () => {
         };
     });
 
-    socket.on('new user', data => {
-        // update user list
-    });
+    // Recieve a new message
+    socket.on('new message', data => newMessage(data));
 
-    socket.on('new message', (data) => {
+    // Load messages
+    socket.on('load messages', data => loadMessages(data));
+
+});
+
+function loadMessages(data) {
+    // Save channel name in client-side memory
+    sessionStorage.setItem('channel', data.channel);
+    document.querySelector('#channelname').innerHTML = data.channel;
+    const messages = data.messages;
+    document.querySelector('#messages').innerHTML = "";
+    messages.forEach(data => {
         const li = document.createElement('li');
+        if (!data.time) data.time="";
         li.innerHTML = `<strong>${data.name}</strong>: ${data.message} ${data.time}`;
         document.querySelector('#messages').append(li);
-        scrollToBottom();
     });
+    scrollToBottom();
+};
 
-
-    // update channel list
-    socket.on('new channel', data => {
-        
-    });
-
-    // Load channel data
-    socket.on('change channel', data => {
-        // Save channel name in client-side memory
-        sessionStorage.setItem('channel', data.channel);
-        document.querySelector('#channelname').innerHTML = data.channel;
-        const messages = data.messages;
-        document.querySelector('#messages').innerHTML = "";
-        messages.forEach(data => {
-            const li = document.createElement('li');
-            if (!data.time) data.time=""
-            li.innerHTML = `<strong>${data.name}</strong>: ${data.message} ${data.time}`;
-            document.querySelector('#messages').append(li);
-        });
-        scrollToBottom();
-    });
-
-    socket.on('remove name', data => {
-        // remove name from current users
-    });
-    
-});
+function newMessage(data) {
+    const li = document.createElement('li');
+    li.innerHTML = `<strong>${data.name}</strong>: ${data.message} ${data.time}`;
+    document.querySelector('#messages').append(li);
+    scrollToBottom();
+};
 
 function scrollToBottom() {
     let messageList = document.querySelector('#message-list')
     messageList.scrollTop = messageList.scrollHeight - messageList.clientHeight;
     console.log(messageList.scrollTop);
-}
+};

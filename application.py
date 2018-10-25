@@ -56,13 +56,13 @@ def create(json):
         # emit("new channel", {"channel": channel}, broadcast=True)
 
 # Change the channel
-@socketio.on("change")
+@socketio.on("load channel")
 def change(json):
     before = json["before"]
     leave_room(before)
     channel = json["after"]
     join_room(channel)
-    emit("change channel", {"channel": channel, "messages": list(channels[channel])})
+    emit("load messages", {"channel": channel, "messages": list(channels[channel])})
 
 # leave the user
 @socketio.on("leave")
