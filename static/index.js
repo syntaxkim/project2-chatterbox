@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
     socket.on('connect', () => {
 
         // Disply the default channel
-        socket.emit('load channel', {'before': null, 'after': channel});
+        socket.emit('get messages', {'before': null, 'after': channel});
         
         // Join in a user
         document.querySelector('#join').onclick = join;
@@ -97,7 +97,7 @@ document.addEventListener('DOMContentLoaded', () => {
         link.onclick = () => {
             const before = sessionStorage.getItem('channel');
             const after = link.dataset.channel;
-            socket.emit('load channel', {'before': before, 'after': after});
+            socket.emit('get messages', {'before': before, 'after': after});
         };
     };
 

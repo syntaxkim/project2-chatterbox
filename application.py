@@ -56,8 +56,8 @@ def create(json):
         return 0
         # emit("new channel", {"channel": channel}, broadcast=True)
 
-# Change the channel
-@socketio.on("load channel")
+# Load messages
+@socketio.on("get messages")
 def change(json):
     before = json["before"]
     leave_room(before)
