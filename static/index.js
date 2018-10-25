@@ -74,7 +74,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     if (data === 1) {
                         document.querySelector('#channel_message').innerHTML = "The same channel name already exists.";
                         return false;
-                    } else {
+                    } else if (data === 0) {
                         location.reload();
                         alert(`New channel: '${channel}' created.`);
                     };
