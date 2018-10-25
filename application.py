@@ -32,7 +32,6 @@ def join(json):
         return 1
     else:
         users.add(name)
-        # emit("new user", {"name": name}, broadcast=True)
 
 # Send a message
 @socketio.on("send")
@@ -70,7 +69,6 @@ def leave(json):
     name = json["name"]
     if name in users:
         users.remove(name)
-        # emit("remove name", {"name": name}, broadcast=True)
 
 @socketio.on_error()
 def error_handler(e):
