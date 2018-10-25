@@ -111,16 +111,11 @@ function loadMessages(data) {
     document.querySelector('#channelname').innerHTML = data.channel;
     const messages = data.messages;
     document.querySelector('#messages').innerHTML = "";
-    messages.forEach(data => {
-        const li = document.createElement('li');
-        if (!data.time) data.time="";
-        li.innerHTML = `<strong>${data.name}</strong>: ${data.message} ${data.time}`;
-        document.querySelector('#messages').append(li);
-    });
-    scrollToBottom();
+    messages.forEach(data => newMessage(data));
 };
 
 function newMessage(data) {
+    if (!data.time) data.time="";
     const li = document.createElement('li');
     li.innerHTML = `<strong>${data.name}</strong>: ${data.message} ${data.time}`;
     document.querySelector('#messages').append(li);
