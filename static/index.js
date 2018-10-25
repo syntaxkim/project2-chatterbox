@@ -17,8 +17,6 @@ document.addEventListener('DOMContentLoaded', () => {
         var channel = sessionStorage.getItem('channel');
     };
 
-    console.log(document.querySelector('#message-list').scrollHeight);
-
     // Connect to websocket
     const url = location.protocol + '//' + document.domain + ':' + location.port;
     var socket = io.connect(url);
@@ -145,4 +143,5 @@ function scrollToBottom() {
     if ( overflow > 0) {
         document.querySelector('#message-list').scrollTo(0, overflow);
     };
+    console.log(document.querySelector('#message-list').scrollTop);
 }

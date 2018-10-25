@@ -22,7 +22,7 @@
 {% block body %}
 <div id="list" class="row justify-content-md-center">
     <!-- channels -->
-    <div class="col-lg-3">
+    <div class="col-md-3">
         <h5 class="text-center">Channel list</h5>
         <div id="channel-list">
             <div class="list-group" id="list-tab" role="tablist">
@@ -37,14 +37,14 @@
             <div class="col-8">
                 <input id="channel_name" class="form-control" type="text" autocomplete="off" placeholder="New channel">
             </div>
-            <div class="col-1">
+            <div class="col-4">
                 <button id="create" class="btn btn-primary">Create</button>
             </div>
             <div id="channel_message"></div>
         </div>
     </div>
     <!-- messages -->
-    <div class="col-lg-9">
+    <div class="col-sm-12 col-md-9">
         <h5 class="text-center">Chat room</h5>
         <div id="message-list" class="border border-dark">    
             <ul id="messages">
@@ -52,20 +52,19 @@
         </div>
         <div>
             <form class="form-row" id="send">
-                <div class="col-10">
+                <div class="col-9">
                     <input id="message" class="form-control" type="text" autocomplete="off" autofocus placeholder="Message">
                 </div>
-                <div class="col-1">
-                    <button class="btn btn-primary" type="submit">Send</button>
-                </div>
-                <div class="col-1">
-                    <button class="btn btn-secondary" id="leave">Leave</button>
+                <div class="col-3">
+                    <button class="btn btn-primary" type="submit" id="button-send">Send</button>
                 </div>
             </form>
         </div>
     </div>
 </div>
-    
+<div>
+    <button class="btn btn-secondary" id="leave">Leave</button>
+</div>
 </div>
 {% endblock %}
 
