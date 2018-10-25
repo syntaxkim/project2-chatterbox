@@ -137,11 +137,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 function scrollToBottom() {
-    var ch = document.querySelector('#message-list').clientHeight;
-    var sh = document.querySelector('#message-list').scrollHeight;
-    var overflow = sh-ch
-    if ( overflow > 0) {
-        document.querySelector('#message-list').scrollTo(0, overflow);
-    };
-    console.log(document.querySelector('#message-list').scrollTop);
+    let messageList = document.querySelector('#message-list')
+    messageList.scrollTop = messageList.scrollHeight - messageList.clientHeight;
+    console.log(messageList.scrollTop);
 }
