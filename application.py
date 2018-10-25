@@ -15,10 +15,10 @@ channels = {"general": deque([], maxlen=100)}
 
 # for development
 channels["general"].append({"name": "general", "message": "Welcome to Chatterbox"})
-channels["channel1"] = deque([], maxlen=100)
-channels["channel1"].append({"name": "channel1", "message": "This is channel 1"})
-channels["channel2"] = deque([], maxlen=100)
-channels["channel2"].append({"name": "channel2", "message": "This is channel 2"})
+channels["channel 1"] = deque([], maxlen=100)
+channels["channel 1"].append({"name": "channel 1", "message": "This is channel 1"})
+channels["channel 2"] = deque([], maxlen=100)
+channels["channel 2"].append({"name": "channel 2", "message": "This is channel 2"})
 
 @app.route("/")
 def index():
@@ -50,8 +50,9 @@ def create(json):
     if channel in channels:
         return 1
     else:
+        time = datetime.now().strftime("%I:%M %p")
         channels[channel] = deque([], maxlen=100)
-        channels[channel].append({"name": channel, "message": "New channel created"})
+        channels[channel].append({"name": channel, "message": "New channel created", "time": time})
         return 0
         # emit("new channel", {"channel": channel}, broadcast=True)
 
