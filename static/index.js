@@ -37,27 +37,11 @@ document.addEventListener('DOMContentLoaded', () => {
         document.querySelector('#create').onclick = create;
 
         // Load the channel
-        document.querySelectorAll('.channel').forEach(link => {
-            link.onclick = () => {
-                const before = sessionStorage.getItem('channel');
-                const after = link.dataset.channel;
-                socket.emit('load channel', {'before': before, 'after': after});
-            };
-        });
+        document.querySelectorAll('.channel').forEach(link => load(link));
 
         // Leave the user
-        document.querySelector('#leave').onclick = () => {
-            socket.emit('leave', {'name': name});
-            sessionStorage.clear();
-            location.reload();
-        };
+        document.querySelector('#leave').onclick = leave;
     });
-
-    // Recieve a new message
-    socket.on('new message', data => newMessage(data));
-
-    // Load messages
-    socket.on('load messages', data => loadMessages(data));
 
     function join() {
         const name = document.querySelector('#name').value;
@@ -109,10 +93,29 @@ document.addEventListener('DOMContentLoaded', () => {
         };
     };
 
+    function load(link) {
+        link.onclick = () => {
+            const before = sessionStorage.getItem('channel');
+            const after = link.dataset.channel;
+            socket.emit('load channel', {'before': before, 'after': after});
+        };
+    };
+
+    function leave() {
+        socket.emit('leave', {'name': name});
+        sessionStorage.clear();
+        location.reload();
+    };
+
+    // Load messages
+    socket.on('load messages', data => loadMessages(data));
+
+    // Recieve a new message
+    socket.on('new message', data => newMessage(data));
+
 });
 
 function loadMessages(data) {
-    // Save channel name in client-side memory
     sessionStorage.setItem('channel', data.channel);
     document.querySelector('#channelname').innerHTML = data.channel;
     const messages = data.messages;
