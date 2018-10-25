@@ -17,6 +17,8 @@ document.addEventListener('DOMContentLoaded', () => {
         var channel = sessionStorage.getItem('channel');
     };
 
+    console.log(document.querySelector('#message-list').scrollHeight);
+
     // Connect to websocket
     const url = location.protocol + '//' + document.domain + ':' + location.port;
     var socket = io.connect(url);
@@ -105,12 +107,13 @@ document.addEventListener('DOMContentLoaded', () => {
         const li = document.createElement('li');
         li.innerHTML = `<strong>${data.name}</strong>: ${data.message} ${data.time}`;
         document.querySelector('#messages').append(li);
+        scrollToBottom();
     });
 
 
     // update channel list
     socket.on('new channel', data => {
-
+        
     });
 
     // Load channel data
@@ -126,6 +129,7 @@ document.addEventListener('DOMContentLoaded', () => {
             li.innerHTML = `<strong>${data.name}</strong>: ${data.message} ${data.time}`;
             document.querySelector('#messages').append(li);
         });
+        scrollToBottom();
     });
 
     socket.on('remove name', data => {
@@ -133,3 +137,12 @@ document.addEventListener('DOMContentLoaded', () => {
     });
     
 });
+
+function scrollToBottom() {
+    var ch = document.querySelector('#message-list').clientHeight;
+    var sh = document.querySelector('#message-list').scrollHeight;
+    var overflow = sh-ch
+    if ( overflow > 0) {
+        document.querySelector('#message-list').scrollTo(0, overflow);
+    };
+}
