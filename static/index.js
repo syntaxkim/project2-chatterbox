@@ -2,10 +2,10 @@
 document.addEventListener('DOMContentLoaded', () => {
     
     // Get user name
-    if(!sessionStorage.getItem('name')) {
+    if(!localStorage.getItem('name')) {
         $('#modal').modal({ show:true, focus:true, keyboard:false, backdrop:'static' })
     } else {
-        var name = sessionStorage.getItem('name')
+        var name = localStorage.getItem('name')
         document.querySelector('#username').innerHTML = name;
     };
 
@@ -55,7 +55,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     document.querySelector('#user_message').innerHTML = "Username already taken";
                     return false;
                 } else {
-                    sessionStorage.setItem('name', name);
+                    localStorage.setItem('name', name);
                     location.reload();
                 };
             });
@@ -103,6 +103,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function leave() {
         socket.emit('leave', {'name': name});
+        localStorage.clear();
         sessionStorage.clear();
         location.reload();
     };
