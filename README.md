@@ -19,6 +19,7 @@ Username and channel name are saved in local and session storage each.
 ## Notes
 * The application is deployed with [Heroku](https://www.heroku.com).
 * Due to server's automatic sleep function, a short delay could occur to reboot the application.
+* Manually set time to South Korea as hosting server is located in United States.
 
 
 ## Languages and Tools
