@@ -1,6 +1,6 @@
 import os
 from collections import deque
-from datetime import datetime
+from datetime import datetime, timedelta
 
 from flask import Flask, render_template
 from flask_socketio import SocketIO, emit, join_room, leave_room
@@ -36,7 +36,7 @@ def join(json):
 # Send a message
 @socketio.on("send")
 def send(json):
-    time = datetime.now().strftime("%I:%M %p")
+    time = (datetime.now() + timedelta(hours=9)).strftime("%I:%M %p")
     message = {"name": json['name'], "message": json["message"], "time": time}
     channels[json["channel"]].append(message)
     emit("new message", message, room=json["channel"])
@@ -48,7 +48,7 @@ def create(json):
     if channel in channels:
         return 1
     else:
-        time = datetime.now().strftime("%I:%M %p")
+        time = (datetime.now() + timedelta(hours=9)).strftime("%I:%M %p")
         channels[channel] = deque([], maxlen=100)
         channels[channel].append({"name": channel, "message": "New channel created", "time": time})
         return 0
