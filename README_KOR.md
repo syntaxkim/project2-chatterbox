@@ -1,6 +1,6 @@
 # Project 2 - Chatterbox (JavaScript)
 
-한국어: [README_KOR.md](https://github.com/syntaxkim/project2-chatterbox/blob/master/README_KOR.md)
+English: [README.md](https://github.com/syntaxkim/project2-chatterbox/blob/master/README.md)
 
 JavaScript로 구현한 싱글 페이지 애플리케이션(SPA)입니다. 온라인 메시징 서비스를 제공합니다.
 
