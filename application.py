@@ -36,7 +36,7 @@ def join(json):
 # Send a message
 @socketio.on("send")
 def send(json):
-    time = (datetime.now() + timedelta(hours=9)).strftime("%I:%M %p")
+    time = get_time()
     message = {"name": json['name'], "message": json["message"], "time": time}
     channels[json["channel"]].append(message)
     emit("new message", message, room=json["channel"])
@@ -48,7 +48,7 @@ def create(json):
     if channel in channels:
         return 1
     else:
-        time = (datetime.now() + timedelta(hours=9)).strftime("%I:%M %p")
+        time = get_time()
         channels[channel] = deque([], maxlen=100)
         channels[channel].append({"name": channel, "message": "New channel created", "time": time})
         return 0
@@ -73,6 +73,9 @@ def leave(json):
 @socketio.on_error()
 def error_handler(e):
     print(f"An error has occured: {str(e)}")
+
+def get_time():
+    return (datetime.now() + timedelta(hours=9)).strftime("%I:%M %p")
 
 if __name__ == "__main__":
     socketio.run(app, host="0.0.0.0")
