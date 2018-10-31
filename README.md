@@ -13,6 +13,24 @@ Full-duplex communication with multiple users by using socket.
 ### Create your own channel
 You can create your own channel as many as you want. Multiple channels are implemented by using Python's dictionary(hash table) and deque(queue).
 
+Data structures
+```
+channels = {"general": deque([], maxlen=100)}
+
+    channels (dictionary)
+      |
+      v
+    "general" (deque)
+      |\____________________________
+      |                             |
+      v                             v
+    message1 (dictionary)         message2 
+      |\____________________ ____________________
+      |                     |                    |
+      v                     v                    v
+    "name"               "message"             "time"
+```
+
 ### Save user information
 Username and channel name are saved in local and session storage each.
 
