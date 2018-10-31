@@ -11,7 +11,7 @@ A single-page application(SPA) which is an online messaging service using Flask 
 Full-duplex communication with multiple users by using socket.
 
 ### Create your own channel
-You can create your own channel as many as you want.
+You can create your own channel as many as you want. Multiple channels are implemented by using Python's dictionary(hash table) and deque(stack).
 
 ### Save user information
 Username and channel name are saved in local and session storage each.
