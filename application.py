@@ -4,6 +4,7 @@ from datetime import datetime, timedelta
 
 from flask import Flask, render_template
 from flask_socketio import SocketIO, emit, join_room, leave_room
+import requests
 
 app = Flask(__name__)
 app.config["SECRET_KEY"] = os.urandom(24)
@@ -33,9 +34,28 @@ def join(json):
     else:
         users.add(name)
 
+res = requests.get("https://api.exchangeratesapi.io/latest")
+if res.status_code != 200:
+    raise Exception("ERROR: API request unsuccessful.")
+data = res.json()
+currency_list = []
+for k in data['rates']:
+    currency_list.append(k)
+
 # Send a message
 @socketio.on("send")
 def send(json):
+    # If user asks for exchange rate,
+    if json["message"].upper() in currency_list:
+        base = json["message"].upper()
+        # Get currency data using external API.
+        r = requests.get('https://api.exchangeratesapi.io/latest', params={'base': base, 'symbols': 'KRW'})
+        print(f"API request for exchange rate of {base}")
+        if r.status_code != 200:
+            json["message"] = 'Error: API request useccessful.'
+        else:
+            json["message"] = f"1 {base} is equal to {r.json()['rates']['KRW']} KRW"
+
     time = get_time()
     message = {"name": json['name'], "message": json["message"], "time": time}
     channels[json["channel"]].append(message)

@@ -9,6 +9,7 @@ gevent-websocket = "*"
 gunicorn = "*"
 Flask = "*"
 Flask-SocketIO = "*"
+requests = "*"
 
 [dev-packages]
 pylint = "*"
