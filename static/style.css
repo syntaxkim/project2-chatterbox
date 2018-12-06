@@ -49,10 +49,31 @@ html, body {
     margin-bottom: 14px;
 }
 
+#currency_list {
+    display: none;
+    position: fixed;
+    overflow: auto;
+    margin: auto;
+    top: 40%;
+    padding: 0;
+    height: auto;
+    animation-name: animatetop;
+    animation-duration: 0.5s;
+}
+
+@keyframes animatetop {
+    from {top: 0%; opacity: 0}
+    to {top: 40%; opacity: 1}
+}
+
 @media screen and (min-width: 500px) {
     #navbar{
         font-size:20px;
         font-weight: 400;
+    }
+
+    #currency_list {
+        width: 50%;
     }
 }
 
@@ -67,5 +88,9 @@ html, body {
 
     #channel-list {
         height: 16vh;
+    }
+
+    #currency_list {
+        width: 90%;
     }
 }

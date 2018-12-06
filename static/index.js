@@ -114,6 +114,20 @@ document.addEventListener('DOMContentLoaded', () => {
     // Recieve a new message
     socket.on('new message', data => newMessage(data));
 
+    // Modal for currency list
+    var currency_list = document.querySelector('#currency_list');
+    document.querySelector('#open_currency_list').onclick = () => {
+        currency_list.style.display = "block";
+    };
+    document.querySelector('#close_currency_list').onclick = () => {
+        currency_list.style.display = "none";
+    };
+    window.onclick = function(event) {
+        if (event.target == currency_list) {
+            currency_list.style.display = "none";
+        };
+    };
+
 });
 
 function loadMessages(data) {

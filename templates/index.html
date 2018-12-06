@@ -48,20 +48,35 @@
 <!-- modal to prompt users to type in their name-->
 <div id="modal" class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="join" aria-hidden="true">
     <div class="modal-dialog modal-sm modal-dialog-centered">
-      <div class="modal-content">
-          <div class="modal-header">
-              <h5 class="modal-title">Choose your display name</h5>
-          </div>
-          <div class="modal-body">
-              <input id="name" type="text" autocomplete="off" autofocus placeholder="Name">
-              <button id="join" class="btn btn-primary">Join</button>
-          </div>
-          <div class="modal-footer">
-              <h6 id="user_message"></h6>
-          </div>
-      </div>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Choose your display name</h5>
+            </div>
+            <div class="modal-body">
+                <input id="name" type="text" autocomplete="off" autofocus placeholder="Name">
+                <button id="join" class="btn btn-primary">Join</button>
+            </div>
+            <div class="modal-footer">
+                <h6 id="user_message"></h6>
+            </div>
+        </div>
     </div>
-  </div>
+</div>
+
+<!-- currency list modal -->
+<div id="currency_list" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title">Available currency list</h5>
+            <span class="close" id="close_currency_list">&times;</span>
+        </div>
+        <div class="modal-body">
+            {% for currency in currency_list %}
+                {{ currency }}, 
+            {% endfor %}
+        </div>
+    </div>
+</div>
 
 <!-- container-body -->
 <div id="container" class="container">
@@ -109,6 +124,7 @@
     </div>
     <div>
         <button class="btn btn-secondary" id="leave">Leave</button>
+        <button id="open_currency_list" class="btn btn-secondary">Available currency list</button>
     </div>
 </div>
 

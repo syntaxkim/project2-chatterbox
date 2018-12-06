@@ -1,10 +1,14 @@
+# Built-in libraries
 import os
 from collections import deque
 from datetime import datetime, timedelta
 
+# External libraries
 from flask import Flask, render_template
 from flask_socketio import SocketIO, emit, join_room, leave_room
-import requests
+
+# Custom library
+from exchangerateapi import get_currency_list, get_exchange_rate
 
 app = Flask(__name__)
 app.config["SECRET_KEY"] = os.urandom(24)
@@ -13,6 +17,7 @@ socketio = SocketIO(app)
 # Server-side memory
 users = set()
 channels = {"general": deque([], maxlen=100)}
+currency_list = get_currency_list()
 
 # for development
 channels["general"].append({"name": "general", "message": "Welcome to Chatterbox"})
@@ -23,7 +28,7 @@ channels["channel 2"].append({"name": "channel 2", "message": "This is channel 2
 
 @app.route("/")
 def index():
-    return render_template("index.html", channels=list(channels), users=list(users))
+    return render_template("index.html", channels=list(channels), users=list(users), currency_list=currency_list)
 
 # Join in a user
 @socketio.on("join")
@@ -34,28 +39,25 @@ def join(json):
     else:
         users.add(name)
 
-# Get available currency list
-res = requests.get("https://api.exchangeratesapi.io/latest")
-if res.status_code != 200:
-    raise Exception("ERROR: API request unsuccessful.")
-data = res.json()
-currency_list = []
-for k in data['rates']:
-    currency_list.append(k)
-
 # Send a message
 @socketio.on("send")
 def send(json):
     # If user asks for exchange rate,
-    if json["message"].upper() in currency_list:
-        base = json["message"].upper()
-        # Get currency data using external API.
-        r = requests.get('https://api.exchangeratesapi.io/latest', params={'base': base, 'symbols': 'KRW'})
-        print(f"API request for exchange rate of {base}")
-        if r.status_code != 200:
-            json["message"] = 'Error: API request useccessful.'
-        else:
-            json["message"] = f"1 {base} is equal to {r.json()['rates']['KRW']} KRW"
+    text = json["message"].upper().split()
+    if len(text) <= 2 and text[-1] in currency_list:
+
+        if len(text) == 1:
+            quantity = 1
+            base = text[0]
+        elif len(text) == 2:
+            quantity = int(text[0])
+            base = text[1]
+
+        try:
+            exchange_rate = get_exchange_rate(base)
+            json["message"] = f"{quantity} {base} is equal to {exchange_rate * quantity:.2f} KRW"
+        except:
+            json["message"] = "ERROR: API request unsuccessful."
 
     time = get_time()
     message = {"name": json['name'], "message": json["message"], "time": time}
