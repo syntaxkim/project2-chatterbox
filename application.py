@@ -34,6 +34,7 @@ def join(json):
     else:
         users.add(name)
 
+# Get available currency list
 res = requests.get("https://api.exchangeratesapi.io/latest")
 if res.status_code != 200:
     raise Exception("ERROR: API request unsuccessful.")
