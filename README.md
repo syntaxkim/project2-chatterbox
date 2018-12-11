@@ -39,7 +39,7 @@ channels = {"general": deque([], maxlen=100)}
 The base currency is set to KRW.
 ![exchangerate](https://raw.githubusercontent.com/syntaxkim/project2-chatterbox/master/screenshots/screenshot3.png)
 
-You can also look up a list of available exchange rates (AJAX)
+You can also look up a list of available exchange rates. (AJAX)
 
 ![curreny list](https://raw.githubusercontent.com/syntaxkim/project2-chatterbox/master/screenshots/screenshot4.png)
 
