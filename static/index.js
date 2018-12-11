@@ -142,9 +142,21 @@ function loadMessages(data) {
 
 function newMessage(data) {
     if (!data.time) data.time="";
-    const li = document.createElement('li');
-    li.innerHTML = `<strong>${data.name}</strong>: ${data.message} ${data.time}`;
-    document.querySelector('#messages').append(li);
+
+    const card = document.createElement('div');
+    const att = document.createAttribute("class");
+    att.value = "card mb-1";
+    card.setAttributeNode(att);
+
+    const cardBody = document.createElement('div');
+    const att2 = document.createAttribute("class");
+    att2.value = "card-body py-3";
+    cardBody.setAttributeNode(att2);
+
+    card.append(cardBody);
+    cardBody.innerHTML = `<strong>${data.name}</strong> : ${data.message} ${data.time}`;
+
+    document.querySelector('#messages').append(card);
     scrollToBottom();
 };
 

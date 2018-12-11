@@ -21,10 +21,6 @@ html, body {
     margin-bottom: 20px;
 }
 
-#message-list {
-    padding-top: 10px;
-}
-
 #footer{
     font-size: 10px;
     color: darkgrey;
@@ -42,7 +38,7 @@ html, body {
 }
 
 #messages {
-    list-style-type: none;
+    border: none;
 }
 
 .form-row {
