@@ -4,7 +4,7 @@ from collections import deque
 from datetime import datetime, timedelta
 
 # External libraries
-from flask import Flask, render_template
+from flask import Flask, render_template, jsonify
 from flask_socketio import SocketIO, emit, join_room, leave_room
 
 # Custom library
@@ -28,7 +28,7 @@ channels["channel 2"].append({"name": "channel 2", "message": "This is channel 2
 
 @app.route("/")
 def index():
-    return render_template("index.html", channels=list(channels), users=list(users), currency_list=currency_list)
+    return render_template("index.html", channels=list(channels), users=list(users))
 
 # Join in a user
 @socketio.on("join")
@@ -96,6 +96,11 @@ def leave(json):
 @socketio.on_error()
 def error_handler(e):
     print(f"An error has occured: {str(e)}")
+
+@app.route("/getCurrencyList", methods=["GET"])
+def getCurrencyList():
+    currency_list = get_currency_list()
+    return jsonify({"currency_list": currency_list})
 
 def get_time():
     return (datetime.now() + timedelta(hours=9)).strftime("%I:%M %p")

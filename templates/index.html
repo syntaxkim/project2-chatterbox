@@ -64,16 +64,13 @@
 </div>
 
 <!-- currency list modal -->
-<div id="currency_list" class="modal">
+<div id="currency_modal" class="modal">
     <div class="modal-content">
         <div class="modal-header">
             <h5 class="modal-title">Available currency list</h5>
             <span class="close" id="close_currency_list">&times;</span>
         </div>
-        <div class="modal-body">
-            {% for currency in currency_list %}
-                {{ currency }}, 
-            {% endfor %}
+        <div id="currency_list" class="modal-body">
         </div>
     </div>
 </div>

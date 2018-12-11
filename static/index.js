@@ -115,16 +115,18 @@ document.addEventListener('DOMContentLoaded', () => {
     socket.on('new message', data => newMessage(data));
 
     // Modal for currency list
-    var currency_list = document.querySelector('#currency_list');
-    document.querySelector('#open_currency_list').onclick = () => {
-        currency_list.style.display = "block";
-    };
+    var currency_modal = document.querySelector('#currency_modal');
+    
+    // Get currency list
+    document.querySelector('#open_currency_list').onclick = getCurrencyList;
+
+    // Close currency modal
     document.querySelector('#close_currency_list').onclick = () => {
-        currency_list.style.display = "none";
+        currency_modal.style.display = "none";
     };
     window.onclick = function(event) {
-        if (event.target == currency_list) {
-            currency_list.style.display = "none";
+        if (event.target == currency_modal) {
+            currency_modal.style.display = "none";
         };
     };
 
@@ -151,3 +153,23 @@ function scrollToBottom() {
     messageList.scrollTop = messageList.scrollHeight - messageList.clientHeight;
     console.log(messageList.scrollTop);
 };
+
+function getCurrencyList() {
+    const request = new XMLHttpRequest();
+    request.open('GET', '/getCurrencyList');
+    request.responseType = 'json';
+
+    request.onload = () => {
+        document.querySelector('#currency_list').innerHTML = '';
+        const data = request.response;
+        var currency_list = data.currency_list;
+        currency_list.forEach(currency => {
+            document.querySelector('#currency_list').append(`${currency}, `);
+        });
+        currency_modal.style.display = "block";    
+    };
+
+    request.send();
+
+    return false;
+}

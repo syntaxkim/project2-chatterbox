@@ -49,7 +49,7 @@ html, body {
     margin-bottom: 14px;
 }
 
-#currency_list {
+#currency_modal {
     display: none;
     position: fixed;
     overflow: auto;
@@ -72,7 +72,7 @@ html, body {
         font-weight: 400;
     }
 
-    #currency_list {
+    #currency_modal {
         width: 50%;
     }
 }
@@ -90,7 +90,7 @@ html, body {
         height: 16vh;
     }
 
-    #currency_list {
+    #currency_modal {
         width: 90%;
     }
 }
