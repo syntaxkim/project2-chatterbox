@@ -2,13 +2,15 @@
 
 English: [README.md](https://github.com/syntaxkim/project2-chatterbox/blob/master/README.md)
 
-JavaScript로 구현한 싱글 페이지 애플리케이션(SPA)입니다. 온라인 메시징 서비스를 제공합니다.
+JavaScript로 구현한 싱글 페이지 애플리케이션(SPA)입니다. 소켓을 활용한 전이중(Full-duplex) 통신 온라인 메시징 서비스를 제공합니다.
 
+![chatroom](https://raw.githubusercontent.com/syntaxkim/project2-chatterbox/master/screenshots/screenshot2.png)
 
 ## 기능
 
-### 실시간 메시징
-소켓을 활용한 전이중(Full-duplex) 통신으로 다수의 유저와 채팅이 가능합니다.
+### 유저 기억
+유저의 이름은 로컬 스토리지, 채널은 세션 스토리지에 각각 저장되게 하였습니다.
+![join](https://raw.githubusercontent.com/syntaxkim/project2-chatterbox/master/screenshots/screenshot0.png)
 
 ### 채널 생성
 기본 채널에 더해 접속자가 원하는 만큼 새로운 채널 생성이 가능합니다. Python의 hast table 자료구조인 dictionary와 queue 자료구조인 deque를 사용해 다수 채널을 구현하였습니다.
@@ -31,13 +33,17 @@ channels = {"general": deque([], maxlen=100)}
     "name"               "message"             "time"
 ```
 
-### 유저 기억
-유저의 이름은 로컬 스토리지, 채널은 세션 스토리지에 각각 저장되게 하였습니다.
+![join](https://raw.githubusercontent.com/syntaxkim/project2-chatterbox/master/screenshots/screenshot1.png)
 
-## 기타
-* 애플리케이션은 [Heroku](https://www.heroku.com)에서 호스팅 됩니다.
-* 서버의 자동 휴면 기능으로 인해 접속 시 약간의 지연이 있을 수 있습니다.
-* 서버가 미국에 있는 관계로 시간대를 대한민국으로 수동 조정하였습니다.
+### 실시간 환율 정보 (추가 기능)
+KRW 기준으로 환율 정보를 제공합니다.
+![exchangerate](https://raw.githubusercontent.com/syntaxkim/project2-chatterbox/master/screenshots/screenshot3.png)
+
+지원되는 통화 목록을 확인할 수 있습니다. (AJAX)
+
+![curreny list](https://raw.githubusercontent.com/syntaxkim/project2-chatterbox/master/screenshots/screenshot4.png)
+
+API: [exchangeratesapi](https://exchangeratesapi.io/)
 
 
 ## Languages and Tools
