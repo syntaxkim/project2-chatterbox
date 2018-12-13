@@ -4,6 +4,7 @@
 
 A single-page application(SPA) which provides the full-duplex communication online messaging service using JavaScript and Socket.IO.
 
+Demo app: https://minsu-chatterbox.herokuapp.com/
 ![chatroom](https://raw.githubusercontent.com/syntaxkim/project2-chatterbox/master/screenshots/screenshot2.png)
 
 ## Features
