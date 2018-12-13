@@ -4,6 +4,7 @@ English: [README.md](https://github.com/syntaxkim/project2-chatterbox/blob/maste
 
 JavaScript로 구현한 싱글 페이지 애플리케이션(SPA)입니다. 소켓을 활용한 전이중(Full-duplex) 통신 온라인 메시징 서비스를 제공합니다.
 
+데모: https://minsu-chatterbox.herokuapp.com/
 ![chatroom](https://raw.githubusercontent.com/syntaxkim/project2-chatterbox/master/screenshots/screenshot2.png)
 
 ## 기능
