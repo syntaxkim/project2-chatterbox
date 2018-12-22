@@ -14,7 +14,7 @@ Username and channel name are saved in local and session storage each.
 ![join](https://raw.githubusercontent.com/syntaxkim/project2-chatterbox/master/screenshots/screenshot0.png)
 
 ### Create your own channel
-You can create your own channel as many as you want. Multiple channels are implemented by using Python's dictionary(hash table) and deque(queue).
+You can create your own channel as many as you want. Multiple channels are implemented by using Python's dictionary(hash table) and deque(deque).
 
 Data structures
 ```

@@ -14,7 +14,7 @@ JavaScript로 구현한 싱글 페이지 애플리케이션(SPA)입니다. 소�
 ![join](https://raw.githubusercontent.com/syntaxkim/project2-chatterbox/master/screenshots/screenshot0.png)
 
 ### 채널 생성
-기본 채널에 더해 접속자가 원하는 만큼 새로운 채널 생성이 가능합니다. Python의 hast table 자료구조인 dictionary와 queue 자료구조인 deque를 사용해 다수 채널을 구현하였습니다.
+기본 채널에 더해 접속자가 원하는 만큼 새로운 채널 생성이 가능합니다. Python의 hast table 자료구조인 dictionary와 deque 자료구조인 deque를 사용해 다수 채널을 구현하였습니다.
 
 자료 구조
 ```
